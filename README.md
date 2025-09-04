@@ -1,15 +1,15 @@
 # Circuit-RunnersV1
 Software Development Project Fall 2025
 
-## How to Guide:
+### How to Guide:
 - Cloning the project:
-- First to clone the project, and work on it yourselves, open the repository, hit the <> Code button.
+- First to clone the project, open this Github repository, and hit the <> Code button.
 - Next, select download Zip.
 - Unpack the zip file and place it on your desktop/project folder.
 
 # Unity
 - Our next step is to open Unity Hub.
-- Select Add, then project from Disk and choose the Circuit Runners folder inside the unpacked Zip.
+- Select Add, then in the drop down, choose: "Project from Disk" and choose the Circuit Runners folder inside the unpacked Zip.
 - Wait for the project to open.
 - Then select scene, and double click the option. 
 
