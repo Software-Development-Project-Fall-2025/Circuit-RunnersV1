@@ -35,7 +35,7 @@ Software Development Project Fall 2025
 # Method 1
 - Go back to the github repository.
 - Select the <> Code Button, and hit the Open with Github Desktop option.
-- On Github desktop, ensure the current branch drop down is on your branch, if not make a new branch and select it.  
+- On Github desktop, ensure the current branch drop down is on your branch, if not make a new branch and select it (Make sure this new branch is made off of development and NOT main!). 
 - Then any changes you make in the unity project, will show up here. 
 - Make sure to title what changes were made, and add an appropiate description of what was done, and features added/in progress
 - Hit commit, and push the changes (****Important**** Make sure this is pushed to YOUR branch, or development, NOT main!)
@@ -44,7 +44,7 @@ Software Development Project Fall 2025
 - On Github desktop select file:
 - Then in the drop down menu, select add local repository.
 - Hit Choose, then select the unpacked zip folder.  
-- - On Github desktop, ensure the current branch drop down is on your branch, if not make a new branch and select it.  
+- - On Github desktop, ensure the current branch drop down is on your branch, if not make a new branch and select it (Make sure this new branch is made off of development and NOT main!).  
 - Then any changes you make in the unity project, will show up here. 
 - Make sure to title what changes were made, and add an appropiate description of what was done, and features added/in progress
 - Hit commit, and push the changes (****Important**** Make sure this is pushed to YOUR branch, or development, NOT main!)
