@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+    private Vector3 input;
+    void GatherInputs()
+    {
+        moveInput = Input.GetAxis("Vertical");
+        steerInput = Input.GetAxis("Horizontal");
+        input = new Vector3(steerInput, 0, moveInput);
+    }
+    
     public enum Axel
     {
         Front,
@@ -38,15 +46,9 @@ public class CarController : MonoBehaviour
         carRb.centerOfMass = centerOfMass;
     }
 
-    void GetInputs()
-    {
-        moveInput = Input.GetAxis("Vertical");
-        steerInput = Input.GetAxis("Horizontal");
-    }
-
     void Update()
     {
-        GetInputs();
+        GatherInputs();
     }
 
     void LateUpdate()
