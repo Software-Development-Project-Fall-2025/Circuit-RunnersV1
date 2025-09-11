@@ -17,14 +17,14 @@ public class CarController : MonoBehaviour
         public WheelCollider wheelCollider;
         public Axel axel;
     }
-    public float[] accelerationGears = {150,250,350,200,100};
+    public int[] accelerationGears = {150,250,350,200,100};
     public float maxSpeed = 200;
     public float maxAcceleration = 30f;
     public float brakeAcceleration = 50f;
-    public float turnSensitivity = 1f;
-    public float maxSteeringAngle = 30f;
+    public float turnSensitivity = 5f;
+    public float maxSteeringAngle = 20f;
 
-    public float lerpValue = 0.8f;
+    public float lerpValue = 0.2f;
 
     public Vector3 centerOfMass;
 
