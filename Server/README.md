@@ -4,11 +4,11 @@ This is the server component for the Circuit Runners game, handling multiplayer 
 
 ## Features
 
-- 🎮 Real-time multiplayer support using WebSockets
-- 🌐 Web-based game hosting
-- 🔗 Shareable game links
-- 🏠 Local development support
-- 🚀 Easy deployment
+- Real-time multiplayer support using WebSockets
+- Web-based game hosting
+- Shareable game links
+- Local development support
+- Easy deployment
 
 ## Prerequisites
 
