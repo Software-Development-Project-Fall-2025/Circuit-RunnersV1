@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Circuit Runners - WebGL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --accent: #3b82f6;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Roboto, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); }
+    .wrap { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    .card { width: 100%; max-width: 980px; background: var(--panel); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+    header { padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; }
+    h1 { font-size: 20px; margin: 0; }
+    .muted { color: var(--muted); font-size: 14px; }
+    .canvas-shell { position: relative; background: #000; aspect-ratio: 16 / 9; width: 100%; display: grid; place-items: center; }
+    .placeholder { text-align: center; padding: 32px; }
+    .placeholder h2 { margin: 0 0 8px; font-size: 18px; }
+    .placeholder p { margin: 6px 0; color: var(--muted); }
+    .grid { display: grid; gap: 8px; }
+    .hint { padding: 12px; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.35); color: #bfdbfe; border-radius: 8px; font-size: 14px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .grow { flex: 1 1 auto; min-width: 260px; }
+    .btn { background: var(--accent); color: white; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: var(--text); }
+    footer { padding: 16px 24px; display: flex; gap: 12px; justify-content: space-between; align-items: center; }
+    a { color: #93c5fd; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <div>
+          <h1>Circuit Runners - WebGL</h1>
+          <div class="muted">Room and player auto-detected from URL parameters</div>
+        </div>
+        <div class="row">
+          <button id="backBtn" class="btn btn-secondary">Back to Lobby</button>
+        </div>
+      </header>
+
+      <div class="canvas-shell" id="canvasShell">
+        <div class="placeholder">
+          <div class="grid">
+            <h2>No Unity WebGL build found</h2>
+            <p>Place your Unity WebGL build into <code>Server/public/game/Build/</code> and include its loader HTML, or replace this page with Unity's generated <code>index.html</code>.</p>
+            <div class="hint">
+              Expected files after a Unity WebGL build:
+              <div class="grid" style="margin-top: 6px">
+                <code>public/game/Build/YourBuild.data</code>
+                <code>public/game/Build/YourBuild.framework.js</code>
+                <code>public/game/Build/YourBuild.wasm</code>
+                <code>public/game/index.html</code>
+              </div>
+            </div>
+            <p class="muted">Until then, this placeholder ensures the join links work and show parsed parameters.</p>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grow muted">Parsed params: <span id="params"></span></div>
+        <div class="row">
+          <button id="copyBtn" class="btn">Copy Join Link</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const playerName = params.get('name') || `Player${Math.floor(Math.random()*1000)}`;
+    const roomId = params.get('room') || '';
+
+    // Show params
+    document.getElementById('params').textContent = JSON.stringify({ name: playerName, room: roomId });
+
+    // Join via Socket.IO so rooms appear in lobby even without the full build
+    const socket = io({ transports: ['websocket', 'polling'] });
+    socket.on('connect', () => {
+      socket.emit('joinGame', { playerName, roomId: roomId || undefined });
+    });
+
+    // UX helpers
+    document.getElementById('backBtn').onclick = () => { location.href = '/'; };
+    document.getElementById('copyBtn').onclick = async () => {
+      const url = new URL(location.origin + '/game');
+      url.searchParams.set('name', playerName);
+      if (roomId) url.searchParams.set('room', roomId);
+      await navigator.clipboard.writeText(url.toString());
+      const btn = document.getElementById('copyBtn');
+      const t = btn.textContent; btn.textContent = 'Copied!'; setTimeout(()=> btn.textContent = t, 1200);
+    };
+  </script>
+</body>
+</html>
