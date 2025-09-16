@@ -14,6 +14,8 @@ This is the server component for the Circuit Runners game, handling multiplayer 
 
 - Node.js (v14 or later)
 - npm (comes with Node.js)
+- Docker
+- Windows (WSL)
 
 ## Installation
 
