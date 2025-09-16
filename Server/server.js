@@ -5,15 +5,52 @@ const path = require('path');
 const cors = require('cors');
 const compression = require('compression');
 const expressStaticGzip = require('express-static-gzip');
+let createAdapter, Redis;
+try {
+  // Optional dependencies for scaling
+  ({ createAdapter } = require('@socket.io/redis-adapter'));
+  Redis = require('ioredis');
+} catch (_) {
+  // Not installed or not needed in single-host mode
+}
 
 const app = express();
 const server = http.createServer(app);
+// When behind a reverse proxy (e.g., Nginx), enable trust proxy so req.ip and protocol are correct
+app.set('trust proxy', 1);
 const io = new Server(server, {
   cors: {
     origin: process.env.CORS_ORIGIN || '*',
     methods: ['GET', 'POST']
   }
 });
+
+// Optional: enable Redis adapter for multi-host deployments
+if (createAdapter && Redis) {
+  const useRedisUrl = process.env.REDIS_URL && process.env.REDIS_URL.trim().length > 0;
+  const host = process.env.REDIS_HOST || 'localhost';
+  const port = parseInt(process.env.REDIS_PORT || '6379', 10);
+  const password = process.env.REDIS_PASSWORD || undefined;
+
+  try {
+    let pubClient, subClient;
+    if (useRedisUrl) {
+      pubClient = new Redis(process.env.REDIS_URL);
+      subClient = new Redis(process.env.REDIS_URL);
+    } else if (process.env.REDIS_HOST) {
+      pubClient = new Redis({ host, port, password });
+      subClient = new Redis({ host, port, password });
+    }
+    if (pubClient && subClient) {
+      pubClient.on('error', (e) => console.error('Redis pub error:', e.message));
+      subClient.on('error', (e) => console.error('Redis sub error:', e.message));
+      io.adapter(createAdapter(pubClient, subClient));
+      console.log('Socket.IO Redis adapter enabled');
+    }
+  } catch (e) {
+    console.warn('Redis adapter not enabled:', e.message);
+  }
+}
 
 // Middleware
 app.use(compression());

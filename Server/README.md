@@ -134,52 +134,71 @@ await client.EmitAsync("gameUpdate", new {
 });
 ```
 
-## Deploy to the web (production)
+## Deploy to the web (self-hosted, WebSockets)
 
-Our primary option is the Kent-provided host (institutional platform). As a backup, I included a Docker-based deployment below.
+This server is ready to be self-hosted and exposes real-time multiplayer via Socket.IO (WebSockets). You have two common options:
 
-Institutional host (Kent) – general guidance
+Option A — Single container (simple)
 
-1) Provision a Node.js-capable web service or container on the platform
-2) Set environment variables
-   - `NODE_ENV=production`
-   - `PORT` (if required by the platform; many inject it automatically)
-   - `CORS_ORIGIN=https://your-official-hostname` (tighten CORS)
-3) Start command
-   - `npm start`
-4) Upload your Unity WebGL build to `Server/public/game/` (see Unity steps above)
-5) Expose HTTPS and ensure WebSockets are allowed (Socket.IO on `/socket.io`)
-
-Docker backup plan (runs anywhere with Docker)
-
-From the `Server/` directory (Dockerfile provided):
+From the `Server/` directory:
 
 ```bash
 # 1) Build the image (ensure your Unity build is already in Server/public/game/)
 docker build -t circuit-runners-server .
 
-# 2) Run the container locally (port 3000)
+# 2) Run the container (maps host port 3000)
 docker run --name circuit-runners -p 3000:3000 \
   -e NODE_ENV=production \
-  -e CORS_ORIGIN="http://localhost:3000" \
-  circuit-runners-server
-
-# Optional: run with your public hostname for correct CORS
-docker run --name circuit-runners -p 3000:3000 \
-  -e NODE_ENV=production \
-  -e CORS_ORIGIN="https://your-domain" \
+  -e CORS_ORIGIN="http://YOUR_HOSTNAME_OR_IP:3000" \
   circuit-runners-server
 ```
 
-Once running:
+PowerShell note (Windows): use backticks for multi-line commands, not backslashes. Example:
 
-- Lobby: `http://<host>:3000`
-- Game: `http://<host>:3000/game?room=ROOM_ID&name=YourName`
+```powershell
+docker run --name circuit-runners -p 3000:3000 `
+  -e NODE_ENV=production `
+  -e CORS_ORIGIN="http://localhost:3000" `
+  circuit-runners-server
+```
+
+If you see `docker: invalid reference format`, it typically means the line breaks were not escaped correctly. Run it as a single line or use PowerShell backticks as shown above.
+
+Visit:
+
+- Lobby: `http://YOUR_HOSTNAME_OR_IP:3000`
+- Game: `http://YOUR_HOSTNAME_OR_IP:3000/game?room=ROOM_ID&name=YourName`
+
+Option B — Docker Compose + Nginx reverse proxy (recommended for HTTPS)
+
+Files provided:
+
+- `Server/docker-compose.yml`
+- `Server/deploy/nginx.conf`
+
+Steps:
+
+```bash
+# 1) Ensure Unity build is in Server/public/game/
+# 2) (Optional) Edit deploy/nginx.conf for your server_name and TLS if terminating HTTPS at Nginx
+# 3) Start both services
+docker compose up -d
+
+# 4) Test over HTTP
+curl http://localhost/health
+```
+
+If you add TLS to Nginx:
+
+- Terminate HTTPS at Nginx and proxy to `app:3000`
+- Set header `X-Forwarded-Proto https` (see nginx.conf comments)
+- In `server.js`, `app.set('trust proxy', 1)` is already enabled so the app respects proxy headers
+- Set `CORS_ORIGIN` to your https origin (e.g., `https://games.example.com`)
 
 CORS & security notes
 
-- In development, CORS is `*`. In production, set `CORS_ORIGIN` to your domain.
-- Use HTTPS in production and ensure the platform supports WebSockets.
+- In development, CORS is `*`. In production, set `CORS_ORIGIN` to your exact site origin.
+- Ensure your reverse proxy supports WebSocket upgrades for `/socket.io/` (configured in `deploy/nginx.conf`).
 
 LAN testing (on your network)
 

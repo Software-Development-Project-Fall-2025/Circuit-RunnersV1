@@ -1,106 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Circuit Runners - WebGL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0f172a;
-      --panel: #111827;
-      --accent: #3b82f6;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: Roboto, system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); }
-    .wrap { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
-    .card { width: 100%; max-width: 980px; background: var(--panel); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
-    header { padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; }
-    h1 { font-size: 20px; margin: 0; }
-    .muted { color: var(--muted); font-size: 14px; }
-    .canvas-shell { position: relative; background: #000; aspect-ratio: 16 / 9; width: 100%; display: grid; place-items: center; }
-    .placeholder { text-align: center; padding: 32px; }
-    .placeholder h2 { margin: 0 0 8px; font-size: 18px; }
-    .placeholder p { margin: 6px 0; color: var(--muted); }
-    .grid { display: grid; gap: 8px; }
-    .hint { padding: 12px; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.35); color: #bfdbfe; border-radius: 8px; font-size: 14px; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 6px; }
-    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-    .grow { flex: 1 1 auto; min-width: 260px; }
-    .btn { background: var(--accent); color: white; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; }
-    .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.18); color: var(--text); }
-    footer { padding: 16px 24px; display: flex; gap: 12px; justify-content: space-between; align-items: center; }
-    a { color: #93c5fd; text-decoration: none; }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="card">
-      <header>
-        <div>
-          <h1>Circuit Runners - WebGL</h1>
-          <div class="muted">Room and player auto-detected from URL parameters</div>
-        </div>
-        <div class="row">
-          <button id="backBtn" class="btn btn-secondary">Back to Lobby</button>
-        </div>
-      </header>
-
-      <div class="canvas-shell" id="canvasShell">
-        <div class="placeholder">
-          <div class="grid">
-            <h2>No Unity WebGL build found</h2>
-            <p>Place your Unity WebGL build into <code>Server/public/game/Build/</code> and include its loader HTML, or replace this page with Unity's generated <code>index.html</code>.</p>
-            <div class="hint">
-              Expected files after a Unity WebGL build:
-              <div class="grid" style="margin-top: 6px">
-                <code>public/game/Build/YourBuild.data</code>
-                <code>public/game/Build/YourBuild.framework.js</code>
-                <code>public/game/Build/YourBuild.wasm</code>
-                <code>public/game/index.html</code>
-              </div>
-            </div>
-            <p class="muted">Until then, this placeholder ensures the join links work and show parsed parameters.</p>
-          </div>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Circuit Runners</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
         </div>
       </div>
-
-      <footer>
-        <div class="grow muted">Parsed params: <span id="params"></span></div>
-        <div class="row">
-          <button id="copyBtn" class="btn">Copy Join Link</button>
-        </div>
-      </footer>
+      <div id="unity-warning"> </div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">Circuit Runners</div>
+      </div>
     </div>
-  </div>
+    <script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
-  <script>
-    const params = new URLSearchParams(location.search);
-    const playerName = params.get('name') || `Player${Math.floor(Math.random()*1000)}`;
-    const roomId = params.get('room') || '';
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var warningBanner = document.querySelector("#unity-warning");
 
-    // Show params
-    document.getElementById('params').textContent = JSON.stringify({ name: playerName, room: roomId });
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
 
-    // Join via Socket.IO so rooms appear in lobby even without the full build
-    const socket = io({ transports: ['websocket', 'polling'] });
-    socket.on('connect', () => {
-      socket.emit('joinGame', { playerName, roomId: roomId || undefined });
-    });
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/game.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/game.data.unityweb",
+        frameworkUrl: buildUrl + "/game.framework.js.unityweb",
+        codeUrl: buildUrl + "/game.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Circuit Runners",
+        productVersion: "0.1.0",
+        showBanner: unityShowBanner,
+      };
 
-    // UX helpers
-    document.getElementById('backBtn').onclick = () => { location.href = '/'; };
-    document.getElementById('copyBtn').onclick = async () => {
-      const url = new URL(location.origin + '/game');
-      url.searchParams.set('name', playerName);
-      if (roomId) url.searchParams.set('room', roomId);
-      await navigator.clipboard.writeText(url.toString());
-      const btn = document.getElementById('copyBtn');
-      const t = btn.textContent; btn.textContent = 'Copied!'; setTimeout(()=> btn.textContent = t, 1200);
-    };
-  </script>
-</body>
+      // By default, Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      // If you would like all file writes inside Unity Application.persistentDataPath
+      // directory to automatically persist so that the contents are remembered when
+      // the user revisits the site the next time, uncomment the following line:
+      // config.autoSyncPersistentDataPath = true;
+      // This autosyncing is currently not the default behavior to avoid regressing
+      // existing user projects that might rely on the earlier manual
+      // JS_FileSystem_Sync() behavior, but in future Unity version, this will be
+      // expected to change.
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "960px";
+        canvas.style.height = "600px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+              }).then((unityInstance) => {
+                loadingBar.style.display = "none";
+                fullscreenButton.onclick = () => {
+                  unityInstance.SetFullscreen(1);
+                };
+              }).catch((message) => {
+                alert(message);
+              });
+            };
+
+      document.body.appendChild(script);
+
+    </script>
+  </body>
 </html>

@@ -227,6 +227,19 @@
             // Base URL for game links
             const baseUrl = window.location.origin;
 
+            // Helper: normalize room input (allow pasting a full join URL)
+            function normalizeRoomId(value) {
+                if (!value) return '';
+                try {
+                    const url = new URL(value);
+                    const fromParam = url.searchParams.get('room');
+                    return fromParam || value; // If no param, fallback
+                } catch (_) {
+                    // Not a URL; return as-is
+                    return value;
+                }
+            }
+
             // Load available rooms
             function loadRooms() {
                 fetch('/api/rooms')
@@ -248,9 +261,10 @@
                                     <span>${room.gameState === 'waiting' ? 'Waiting' : 'In Game'}</span>
                                 </div>
                                 <div class="room-players">Players: ${room.playerCount}/4</div>
-                                <button class="btn btn-success join-room-btn" data-room="${room.id}">
-                                    Join Room
-                                </button>
+                                <div class="row">
+                                    <button class="btn btn-success join-room-btn" data-room="${room.id}">Join Room</button>
+                                    <button class="btn copy-link-btn" data-room="${room.id}">Copy Join Link</button>
+                                </div>
                             `;
                             roomsList.appendChild(roomElement);
                         });
@@ -258,7 +272,7 @@
                         // Add event listeners to join buttons
                         document.querySelectorAll('.join-room-btn').forEach(button => {
                             button.addEventListener('click', () => {
-                                const roomId = button.getAttribute('data-room');
+                                const roomId = normalizeRoomId(button.getAttribute('data-room'));
                                 const name = joinPlayerNameInput.value.trim() || 'Player' + Math.floor(Math.random() * 1000);
                                 if (name) {
                                     joinGame(name, roomId);
@@ -266,6 +280,21 @@
                                     alert('Please enter your name');
                                     joinPlayerNameInput.focus();
                                 }
+                            });
+                        });
+
+                        // Add event listeners to copy-link buttons
+                        document.querySelectorAll('.copy-link-btn').forEach(button => {
+                            button.addEventListener('click', async () => {
+                                const roomId = normalizeRoomId(button.getAttribute('data-room'));
+                                const name = joinPlayerNameInput.value.trim() || 'Player' + Math.floor(Math.random() * 1000);
+                                const url = new URL(`${baseUrl}/game`);
+                                url.searchParams.append('room', roomId);
+                                url.searchParams.append('name', name);
+                                await navigator.clipboard.writeText(url.toString());
+                                const originalText = button.textContent;
+                                button.textContent = 'Copied!';
+                                setTimeout(() => { button.textContent = originalText; }, 1500);
                             });
                         });
                     })
@@ -308,7 +337,7 @@
             // Join an existing game
             joinGameBtn.addEventListener('click', () => {
                 const playerName = joinPlayerNameInput.value.trim() || 'Player' + Math.floor(Math.random() * 1000);
-                const roomId = roomIdInput.value.trim();
+                const roomId = normalizeRoomId(roomIdInput.value.trim());
                 
                 if (playerName) {
                     joinGame(playerName, roomId);
