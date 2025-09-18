@@ -19,14 +19,18 @@ public class CarController : MonoBehaviour
     private float turnInput;
 
     // Static car Variables (Stats)
-    public float fwdSpeed = 200;  
-    //public float[] gearSpeeds = {-50, 25, 50, 75, 60, 40};
-    //public float maxSpeed = 200;
-    public float turnSpeed = 200;
+    public float fwdSpeed = 200f;  
+    public float[] gearSpeeds = {25, 50, 75, 60, 40, -30};
+    // public float maxSpeed = 2f;     //idk why it has to be so low
+    public float turnSpeed = 200f;
 
     // Dynamic car variables for easy access
-    private float currentSpeed;
+    private float currentSpeed;     // also can be sphereRB.velocity
     private float currentTurnAngle;
+    private float currentAcceleration;
+    private int gearIndex;
+    //public float accelerationRate = 5f;
+
 
 
     public Rigidbody sphereRB;
@@ -37,15 +41,25 @@ public class CarController : MonoBehaviour
 
     void Update()
     {   
-        // need to put code for adjustable speed in here
 
         moveInput = Input.GetAxisRaw("Vertical");
         turnInput = Input.GetAxisRaw("Horizontal");
 
 
         transform.position = sphereRB.transform.position;
-        // Meldin gonna kill me for this >_> (ill optimize later)
-        // if()
+
+        // I think this might be more optimal then a switch statement
+        // currentSpeed = Vector3.Dot(transform.forward, sphereRB.velocity);
+        // float speedPercent =  Mathf.Clamp01(currentSpeed / maxSpeed); 
+        // Debug.Log("Speed percent: " + speedPercent + ", the raw calc: " + (currentSpeed/maxSpeed));
+        // gearIndex = Mathf.FloorToInt(speedPercent * (gearSpeeds.Length-1));
+        // //Debug.Log("CurrentSpeed: " + currentSpeed + ", Current gear: " + gearIndex);
+        // if (gearIndex >= gearSpeeds.Length-1) gearIndex = gearSpeeds.Length - 2;
+        // if (moveInput<0) gearIndex = gearSpeeds.Length;         
+        // currentAcceleration = gearSpeeds[gearIndex] * moveInput;
+        // Debug.Log("Gear Index: " + gearIndex);
+        
+        // if (currentSpeed >= maxSpeed) currentAcceleration = 0;
         moveInput *= fwdSpeed; 
         
         float newRotation = turnInput * turnSpeed * Time.deltaTime * Input.GetAxisRaw("Vertical");
@@ -55,6 +69,9 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate() {
         sphereRB.AddForce(transform.forward * moveInput, ForceMode.Acceleration);
+        //sphereRB.AddForce(transform.forward * currentAcceleration, ForceMode.Acceleration);
+        //Debug.Log("current acceleration: " + currentAcceleration);
+
     }
 
 }
