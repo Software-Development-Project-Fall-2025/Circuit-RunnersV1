@@ -1,15 +1,15 @@
 # Circuit-RunnersV1
 Software Development Project Fall 2025
 
-## How to Guide:
+### How to Guide:
 - Cloning the project:
-- First to clone the project, and work on it yourselves, open the repository, hit the <> Code button.
+- First to clone the project, open this Github repository, and hit the <> Code button.
 - Next, select download Zip.
 - Unpack the zip file and place it on your desktop/project folder.
 
 # Unity
 - Our next step is to open Unity Hub.
-- Select Add, then project from Disk and choose the Circuit Runners folder inside the unpacked Zip.
+- Select Add, then in the drop down, choose: "Project from Disk" and choose the Circuit Runners folder inside the unpacked Zip.
 - Wait for the project to open.
 - Then select scene, and double click the option. 
 
@@ -35,7 +35,7 @@ Software Development Project Fall 2025
 # Method 1
 - Go back to the github repository.
 - Select the <> Code Button, and hit the Open with Github Desktop option.
-- On Github desktop, ensure the current branch drop down is on your branch, if not make a new branch and select it.  
+- On Github desktop, ensure the current branch drop down is on your branch, if not make a new branch and select it (Make sure this new branch is made off of development and NOT main!). 
 - Then any changes you make in the unity project, will show up here. 
 - Make sure to title what changes were made, and add an appropiate description of what was done, and features added/in progress
 - Hit commit, and push the changes (****Important**** Make sure this is pushed to YOUR branch, or development, NOT main!)
@@ -44,7 +44,7 @@ Software Development Project Fall 2025
 - On Github desktop select file:
 - Then in the drop down menu, select add local repository.
 - Hit Choose, then select the unpacked zip folder.  
-- - On Github desktop, ensure the current branch drop down is on your branch, if not make a new branch and select it.  
+- - On Github desktop, ensure the current branch drop down is on your branch, if not make a new branch and select it (Make sure this new branch is made off of development and NOT main!).  
 - Then any changes you make in the unity project, will show up here. 
 - Make sure to title what changes were made, and add an appropiate description of what was done, and features added/in progress
 - Hit commit, and push the changes (****Important**** Make sure this is pushed to YOUR branch, or development, NOT main!)
