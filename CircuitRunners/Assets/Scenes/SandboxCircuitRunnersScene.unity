@@ -347,8 +347,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!4 &1009395635 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400010, guid: 9f48272470ebc4641a8f48ebc7ef4be1,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 400010, guid: 9f48272470ebc4641a8f48ebc7ef4be1, type: 3}
   m_PrefabInstance: {fileID: 1890898635}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1890898635
@@ -622,7 +621,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 95798438e735b7b8bb3f7ffd9c57508e, type: 2}
+  - {fileID: 2100000, guid: 456182ced3b641a4585742968fabb326, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
