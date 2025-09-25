@@ -20,7 +20,7 @@ public class CarController : MonoBehaviour
 
     // Static car Variables (Stats)
     public float fwdSpeed = 200f;  
-    public float[] gearSpeeds = {75, 50, 75, 60, 40, -30};
+    public float[] gearSpeeds = {25, 50, 75, 60, 40, -30};
     public float maxSpeed = 2f;     //idk why it has to be so low
     public float turnSpeed = 200f;
 
@@ -68,6 +68,7 @@ public class CarController : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        // I should do velocity here not addForce
         //sphereRB.AddForce(transform.forward * moveInput, ForceMode.Acceleration);
         sphereRB.AddForce(transform.forward * currentAcceleration, ForceMode.Acceleration);
         //Debug.Log("current acceleration: " + currentAcceleration);
