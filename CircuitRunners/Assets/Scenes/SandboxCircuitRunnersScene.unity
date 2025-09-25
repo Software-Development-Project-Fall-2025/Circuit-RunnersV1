@@ -225,6 +225,7 @@ MonoBehaviour:
   - 60
   - 40
   - -30
+  maxSpeed: 200
   turnSpeed: 200
   sphereRB: {fileID: 1897847001}
 --- !u!1 &959174421
