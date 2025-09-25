@@ -54,7 +54,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 3053b3cd0d018b743af797e9f35407f4, type: 3}
+        m_Texture: {fileID: 2800000, guid: ba7da2dfdca9b8144a40f0c1703b81f1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metallic:
@@ -109,7 +109,7 @@ Material:
     - _MainMetallicPower1: 0
     - _MainMetallicPower3: 0
     - _MainMetallicPower4: 0
-    - _MainSmoothnessPower: 1
+    - _MainSmoothnessPower: 1.33
     - _MainSmoothnessPower1: 1
     - _MainSmoothnessPower3: 1
     - _MainSmoothnessPower4: 1
