@@ -110,7 +110,7 @@ Unity WebGL export tips
 
 ### WebSocket Connection
 
-Use the following code in your Unity game to connect to the server:
+Use the following code in the Unity game to connect to the server:
 
 ```csharp
 using SocketIOClient;
@@ -142,6 +142,8 @@ This server is ready to be self-hosted and exposes real-time multiplayer via Soc
 
 Option A — Single container (simple)
 
+(make sure docker desktop is running/ or that docker wsl is working)
+
 From the `Server/` directory:
 
 ```bash
@@ -172,6 +174,7 @@ Visit:
 - Game: `http://YOUR_HOSTNAME_OR_IP:3000/game?room=ROOM_ID&name=YourName`
 
 Option B — Docker Compose + Nginx reverse proxy (recommended for HTTPS)
+# Just a theory currently
 
 Files provided:
 
