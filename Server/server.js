@@ -1,3 +1,7 @@
+// =============================================================
+// Circuit Runners - Multiplayer Game Server
+// =============================================================
+
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -5,50 +9,33 @@ const path = require('path');
 const cors = require('cors');
 const compression = require('compression');
 const expressStaticGzip = require('express-static-gzip');
+
 let createAdapter, Redis;
 try {
-  // Optional dependencies for scaling
   ({ createAdapter } = require('@socket.io/redis-adapter'));
   Redis = require('ioredis');
-} catch (_) {
-  // Not installed or not needed in single-host mode
-}
+} catch (_) {}
 
 const app = express();
 const server = http.createServer(app);
-// When behind a reverse proxy (e.g., Nginx), enable trust proxy so req.ip and protocol are correct
 app.set('trust proxy', 1);
+
 const io = new Server(server, {
   cors: {
     origin: process.env.CORS_ORIGIN || '*',
-    methods: ['GET', 'POST']
-  }
+    methods: ['GET', 'POST'],
+  },
 });
 
-// Optional: enable Redis adapter for multi-host deployments
+// Optional Redis (for scaling)
 if (createAdapter && Redis) {
-  const useRedisUrl = process.env.REDIS_URL && process.env.REDIS_URL.trim().length > 0;
-  const host = process.env.REDIS_HOST || 'localhost';
-  const port = parseInt(process.env.REDIS_PORT || '6379', 10);
-  const password = process.env.REDIS_PASSWORD || undefined;
-
   try {
-    let pubClient, subClient;
-    if (useRedisUrl) {
-      pubClient = new Redis(process.env.REDIS_URL);
-      subClient = new Redis(process.env.REDIS_URL);
-    } else if (process.env.REDIS_HOST) {
-      pubClient = new Redis({ host, port, password });
-      subClient = new Redis({ host, port, password });
-    }
-    if (pubClient && subClient) {
-      pubClient.on('error', (e) => console.error('Redis pub error:', e.message));
-      subClient.on('error', (e) => console.error('Redis sub error:', e.message));
-      io.adapter(createAdapter(pubClient, subClient));
-      console.log('Socket.IO Redis adapter enabled');
-    }
-  } catch (e) {
-    console.warn('Redis adapter not enabled:', e.message);
+    const pub = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
+    const sub = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
+    io.adapter(createAdapter(pub, sub));
+    console.log('✅ Redis adapter enabled');
+  } catch (err) {
+    console.warn('Redis unavailable:', err.message);
   }
 }
 
@@ -57,158 +44,191 @@ app.use(compression());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Serve Unity WebGL Build folder with precompressed assets (Brotli/Gzip)
+// Serve Unity WebGL build (precompressed)
 const unityBuildPath = path.join(__dirname, 'public', 'game', 'Build');
-app.use('/game/Build', expressStaticGzip(unityBuildPath, {
-  enableBrotli: true,
-  orderPreference: ['br', 'gz'],
-  setHeaders: (res, filePath) => {
-    // Long cache for build artifacts
-    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-  }
-}));
+app.use(
+  '/game/Build',
+  expressStaticGzip(unityBuildPath, {
+    enableBrotli: true,
+    orderPreference: ['br', 'gz'],
+    setHeaders: (res) => res.setHeader('Cache-Control', 'public, max-age=31536000, immutable'),
+  })
+);
 
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', uptime: process.uptime() });
-});
+app.get('/health', (_, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 
-// Game state
-const rooms = new Map();
-const players = new Map();
+// =============================================================
+// Game Data Structures
+// =============================================================
+const rooms = new Map(); // roomId → room info
+const players = new Map(); // socket.id → player info
 
-// Socket.io connection handler
+function generateRoomCode() {
+  return Math.random().toString(36).substring(2, 8).toUpperCase();
+}
+
+function broadcastRoomUpdate(roomId) {
+  const room = rooms.get(roomId);
+  if (!room) return;
+  const playerList = Array.from(room.players.values()).map((p) => ({
+    id: p.id,
+    name: p.name,
+    isHost: p.isHost,
+    checkpoint: p.checkpoint || 0,
+  }));
+  io.to(roomId).emit('roomUpdate', playerList);
+}
+
+// =============================================================
+// Socket.IO Logic
+// =============================================================
 io.on('connection', (socket) => {
-  console.log(`New connection: ${socket.id}`);
-  
-  // Handle new player
-  socket.on('joinGame', (playerData) => {
-    const { playerName, roomId } = playerData || {};
+  console.log(`🔌 New connection: ${socket.id}`);
 
-    // Decide the room ID to use
-    let targetRoomId = roomId && String(roomId).trim().length > 0
-      ? String(roomId).trim()
-      : `room_${Math.random().toString(36).substr(2, 9)}`;
+  // Join room
+  socket.on('joinGame', (data) => {
+    const { playerName, roomId } = data || {};
+    const cleanName = playerName?.trim() || `Player_${Math.floor(Math.random() * 1000)}`;
+    const targetRoomId = roomId?.trim() || generateRoomCode();
 
-    // Create the room if it doesn't exist yet
     if (!rooms.has(targetRoomId)) {
       rooms.set(targetRoomId, {
         id: targetRoomId,
         players: new Map(),
+        checkpoints: new Map(),
         gameState: 'waiting',
-        createdAt: Date.now()
+        createdAt: Date.now(),
       });
     }
 
     const room = rooms.get(targetRoomId);
-    const isFirstInRoom = room.players.size === 0;
+    const isHost = room.players.size === 0;
 
     const player = {
       id: socket.id,
-      name: playerName || `Player_${Math.floor(Math.random() * 1000)}`,
+      name: cleanName,
       roomId: targetRoomId,
-      isHost: isFirstInRoom
+      isHost,
+      checkpoint: 0,
     };
 
-    // Add player to room and global index
     room.players.set(socket.id, player);
     players.set(socket.id, player);
-
     socket.join(targetRoomId);
 
-    // Notify all players in the room about the update
-    io.to(targetRoomId).emit('playerJoined', {
-      playerId: socket.id,
-      playerName: player.name,
-      room: {
-        id: room.id,
-        playerCount: room.players.size,
-        gameState: room.gameState,
-        createdAt: room.createdAt
-      },
-      isHost: player.isHost
-    });
+    console.log(`✅ ${cleanName} joined ${targetRoomId}${isHost ? ' (host)' : ''}`);
 
-    // For convenience, reply directly to the joiner with their assigned room
-    socket.emit('joined', { roomId: targetRoomId, isHost: player.isHost });
-
-    console.log(`Player ${player.name} joined room ${targetRoomId}${player.isHost ? ' (host)' : ''}`);
+    socket.emit('joined', { roomId: targetRoomId, isHost });
+    broadcastRoomUpdate(targetRoomId);
   });
 
-  // Handle game state updates
-  socket.on('gameUpdate', (data) => {
-    const player = players.get(socket.id);
-    if (player) {
-      io.to(player.roomId).emit('gameState', data);
+  // Host starts the race
+socket.on("startRace", () => {
+  const player = players.get(socket.id);
+  if (!player) return;
+
+  const room = rooms.get(player.roomId);
+  if (!room) return;
+
+  // Only host can start
+  if (!player.isHost) {
+    socket.emit("errorMessage", { message: "Only the host can start the race." });
+    return;
+  }
+
+  // Avoid duplicate starts
+  if (room.gameState !== "waiting") return;
+
+  room.gameState = "countdown";
+  console.log(`🏁 Race countdown started in room ${room.id}`);
+
+  // Send countdown to all clients
+  let countdown = 3;
+  const countdownInterval = setInterval(() => {
+    io.to(room.id).emit("countdown", { time: countdown });
+    countdown--;
+
+    if (countdown < 0) {
+      clearInterval(countdownInterval);
+      room.gameState = "playing";
+      io.to(room.id).emit("startRace", { roomId: room.id });
+      console.log(`🚗 Race started in room ${room.id}`);
     }
+  }, 1000);
+});
+
+
+  // Position update
+  socket.on('positionUpdate', (pos) => {
+    const player = players.get(socket.id);
+    if (!player) return;
+    io.to(player.roomId).emit('playerPositions', {
+      id: player.id,
+      x: pos.x,
+      y: pos.y,
+      z: pos.z,
+    });
   });
 
-  // Handle disconnection
+  // Checkpoint reached
+  socket.on('checkpointReached', ({ checkpointIndex }) => {
+    const player = players.get(socket.id);
+    if (!player) return;
+
+    player.checkpoint = checkpointIndex;
+    const room = rooms.get(player.roomId);
+    room.checkpoints.set(player.id, checkpointIndex);
+
+    // Recalculate ranks
+    const ranked = Array.from(room.checkpoints.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([id, cp], i) => ({ id, rank: i + 1 }));
+
+    io.to(player.roomId).emit('rankUpdate', ranked);
+  });
+
+  // Disconnection cleanup
   socket.on('disconnect', () => {
     const player = players.get(socket.id);
-    if (player) {
-      const room = rooms.get(player.roomId);
-      if (room) {
-        room.players.delete(socket.id);
-        
-        // If room is empty, clean it up
-        if (room.players.size === 0) {
-          rooms.delete(player.roomId);
-        } else {
-          // Notify other players
-          socket.to(player.roomId).emit('playerLeft', {
-            playerId: socket.id,
-            playerName: player.name
-          });
-        }
+    if (!player) return;
+
+    const room = rooms.get(player.roomId);
+    if (room) {
+      room.players.delete(socket.id);
+      room.checkpoints.delete(socket.id);
+      io.to(player.roomId).emit('playerLeft', { id: socket.id, name: player.name });
+
+      if (room.players.size === 0) {
+        rooms.delete(player.roomId);
+        console.log(`🗑 Room ${player.roomId} deleted`);
+      } else {
+        broadcastRoomUpdate(player.roomId);
       }
-      players.delete(socket.id);
-      console.log(`Player ${player.name} disconnected`);
     }
+    players.delete(socket.id);
+    console.log(`❌ ${player.name} disconnected`);
   });
 
-  // Handle errors
-  socket.on('error', (error) => {
-    console.error('Socket error:', error);
-  });
+  socket.on('error', (err) => console.error('Socket error:', err));
 });
 
-// API Routes
-app.get('/api/rooms', (req, res) => {
-  const publicRooms = Array.from(rooms.values())
-    .filter(room => room.players.size < 4) // Example: Limit players per room
-    .map(room => ({
-      id: room.id,
-      playerCount: room.players.size,
-      gameState: room.gameState,
-      createdAt: room.createdAt
-    }));
-  res.json(publicRooms);
+// =============================================================
+// Routes
+// =============================================================
+app.get('/api/rooms', (_, res) => {
+  const list = Array.from(rooms.values()).map((r) => ({
+    id: r.id,
+    playerCount: r.players.size,
+    gameState: r.gameState,
+    createdAt: r.createdAt,
+  }));
+  res.json(list);
 });
 
-// Serve the Unity WebGL build
-app.get('/game', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'game', 'index.html'));
-});
-
-// Serve the main page
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// Default routes
+app.get('/game', (_, res) => res.sendFile(path.join(__dirname, 'public', 'game', 'index.html')));
+app.get('*', (_, res) => res.sendFile(path.join(__dirname, 'public', 'index.html')));
 
 // Start server
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Socket.IO CORS origin: ${process.env.CORS_ORIGIN || '*'} (set CORS_ORIGIN to restrict in production)`);
-});
-
-// Error handling
-process.on('unhandledRejection', (err) => {
-  console.error('Unhandled Rejection:', err);
-});
-
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err);
-  process.exit(1);
-});
+server.listen(PORT, () => console.log(`🚀 Circuit Runners server running on port ${PORT}`));
