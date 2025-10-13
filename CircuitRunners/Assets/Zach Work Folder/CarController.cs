@@ -1,9 +1,10 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-
+// Zachary Schupbach
+// Fall 25
 // Credit for base mechanics 
 // https://www.youtube.com/watch?v=TBIYSksI10k
+
+using System;
+using UnityEngine;
 
 /*
 Mechanics I want
@@ -12,111 +13,115 @@ When you turn too much at higher speed (after oversteering/drifting a bunch) you
 Gradual Acceleration
 Variables to easily control everything
 */
-public class CarController : MonoBehaviour
-{
-    // Inputs from user
+
+/*
+ This code is currently 35mph ish through turns, you can get up to high 30s
+ before oversteer starts taking over, (might be to much)
+ max speed of 42-44 still doesnt spin you out
+*/
+public class CarController : MonoBehaviour {
     private float moveInput;
     private float turnInput;
 
-    // Static car Variables (Stats)
-    public float maxSpeed = 50f;     
-    public float turnSpeed = 175f;
-    public float baseAcceleration = 250f;   // This also controls max speed
+    public float maxSpeed = 50f;
+    public float turnSpeed = 200f;
+    public float baseAcceleration = 250f;
 
-    public float lateralForce = 40f;      // sideways force for drifting
+    public float lateralForce = 40f;
     public float driftFactor = 0.8f;
-    private bool isDrifting = false;
-    public float riseResponse = 4f;    
-    public float fallResponse = 4f;
+    public float driftStartAngle = 25f;
+    public float spinoutAngle = 65f;
+    public float spinoutTorque = 15f;
+    public float grip = 80f;
 
-    // Dynamic Car variables
+    public float riseResponse = 4f;
+    public float fallResponse = 2f;
+
     private float moveIntensity;
-
+    private bool isDrifting = false;
+    private bool isSpinningOut = false;
 
     public Rigidbody sphereRB;
-    void Start()
-    {
+
+    void Start() {
         sphereRB.transform.parent = null;
     }
 
-    void Update()
-    {   
+    void FixedUpdate() {
 
-    }
-
-    void FixedUpdate()
-    {
         moveInput = Input.GetAxisRaw("Vertical");
         turnInput = Input.GetAxisRaw("Horizontal");
-
         transform.position = sphereRB.transform.position;
 
-        // Get our directional vectors (car according to plane) and speeds
+        // I swear this makes it drive better although it does a stupid lil nose dip
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(sphereRB.velocity.normalized, Vector3.up), Time.fixedDeltaTime * 2f);
+
+
         Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
         Vector3 right = Vector3.Cross(Vector3.up, forward);
+
         float forwardSpeed = Vector3.Dot(sphereRB.velocity, forward);
-        float speedPercent = Mathf.Abs(forwardSpeed) / maxSpeed;
+        float speedPercent = Mathf.Clamp01(Mathf.Abs(forwardSpeed) / maxSpeed);
 
-
-        //input and speed smoothening
+        // Smooths input
         float tau = moveInput != 0f ? riseResponse : fallResponse;
         float alpha = 1f - Mathf.Exp(-Time.fixedDeltaTime / tau);
         moveIntensity += (moveInput - moveIntensity) * alpha;
 
         float accelMultiplier = magicTranny(speedPercent);
         float rawForce = moveIntensity * baseAcceleration * accelMultiplier;
-
-        float speedLimitFactor = 1f - Mathf.Pow(speedPercent, 4); 
+        float speedLimitFactor = 1f - Mathf.Pow(speedPercent, 4);
         float targetForce = rawForce * speedLimitFactor;
 
-        // Only apply force if we're not exceeding speed limits
-        if (!(forwardSpeed > maxSpeed && targetForce > 0) && 
+        if (!(forwardSpeed > maxSpeed && targetForce > 0) &&
             !(forwardSpeed < -maxSpeed * 0.5f && targetForce < 0))
         {
-            sphereRB.AddForce(transform.forward * targetForce, ForceMode.Acceleration);
+            sphereRB.AddForce(forward * targetForce, ForceMode.Acceleration);
         }
 
-
-        // Reduces turn speed at high speeds
-        float turnMultiplier = Mathf.Lerp(1f, 0.5f, speedPercent);
+        float turnMultiplier = Mathf.Lerp(1f, 0.4f, speedPercent);
         float newRotation = turnInput * turnSpeed * turnMultiplier * Time.fixedDeltaTime;
         transform.Rotate(0, newRotation, 0, Space.World);
 
-        // Need to make a real traction element
-        isDrifting = Mathf.Abs(turnInput) > 0.5f && speedPercent > driftFactor;
-        Debug.Log("Drifting: " + isDrifting);
-        if (isDrifting){    
-            sphereRB.AddForce(right * turnInput * lateralForce * speedPercent, ForceMode.Acceleration);
-        }
-        else{
-            float lateralSpeed = Vector3.Dot(sphereRB.velocity, right);
-            Vector3 gripForce = -right * lateralSpeed * 80f; // higher = more grip
-            sphereRB.AddForce(gripForce, ForceMode.Acceleration);
+        Vector3 vel = sphereRB.velocity;
+        if (vel.sqrMagnitude > 0.1f)
+        {
+            float slipAngle = Vector3.SignedAngle(forward, vel.normalized, Vector3.up);
+            float absSlip = Mathf.Abs(slipAngle);
+
+            isDrifting = absSlip > driftStartAngle && absSlip < spinoutAngle;
+            isSpinningOut = absSlip >= spinoutAngle;
+
+            if (isDrifting)
+            {
+                vel = Vector3.Lerp(vel, forward * vel.magnitude, driftFactor * Time.fixedDeltaTime);
+                sphereRB.velocity = vel;
+                sphereRB.AddForce(right * turnInput * lateralForce * speedPercent, ForceMode.Acceleration);
+            }
+            else if (isSpinningOut)
+            {
+                float spinDir = Mathf.Sign(turnInput != 0 ? turnInput : slipAngle);
+                sphereRB.AddTorque(Vector3.up * spinDir * spinoutTorque, ForceMode.Acceleration);
+            }
+            else
+            {
+                float lateralSpeed = Vector3.Dot(sphereRB.velocity, right);
+                Vector3 gripForce = -right * lateralSpeed * grip;
+                sphereRB.AddForce(gripForce, ForceMode.Acceleration);
+            }
         }
 
-        Debug.Log("Current Speed: " + forwardSpeed);
+        sphereRB.drag = Mathf.Lerp(0.2f, 2f, speedPercent); // Adds all the oversteer 
+        Debug.Log("Speed: " + forwardSpeed); 
     }
 
-
     private float magicTranny(float speedPercent){
+        // Definitley needs another gear but its fucky
         if (speedPercent < 0.3f)
-            return Mathf.Lerp(0.3f, 0.7f, speedPercent / 0.3f);  
+            return Mathf.Lerp(0.3f, 0.7f, speedPercent / 0.3f);
         else if (speedPercent < 0.6f)
-            return Mathf.Lerp(0.7f, 1.0f, (speedPercent - 0.3f) / 0.3f);  
+            return Mathf.Lerp(0.7f, 1.0f, (speedPercent - 0.3f) / 0.3f);
         else
-            return 1.0f;  
-
-
-
-        // if (speedPercent < 0.15f)
-        //     return Mathf.Lerp(0.01f, 0.2f, speedPercent / 0.15f);
-        // else if (speedPercent < 0.4)
-        //     return Mathf.Lerp(0.1f, 0.8f, (speedPercent-0.15f) / 0.25f);
-        // else if (speedPercent < 0.65f)
-        //     return Mathf.Lerp(0.7f, 1.0f, (speedPercent - 0.4f) / 0.25f);
-        // else if (speedPercent < 0.85f)
-        //     return Mathf.Lerp(0.9f, 0.4f, (speedPercent - 0.8f) / 0.2f);
-        // else
-        //     return Mathf.Lerp(0.3f, 0.1f, (speedPercent - 0.85f) / 0.15f);
+            return 1.0f;
     }
 }
