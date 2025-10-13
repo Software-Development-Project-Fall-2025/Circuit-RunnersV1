@@ -22,6 +22,14 @@ public class ButtonHandler : MonoBehaviour
     {
         t.SetActive(true);
     }
+
+    //Test a button works
+    public void LogClick(string button)
+    {
+        Debug.Log(button + " was clicked.");
+
+    }
+
     //Exit is here for self build testing
     public void Quit(){
         Application.Quit();
