@@ -1,12 +1,43 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ButtonHandler : MonoBehaviour
 {
+    [Header("Button if Needed")]
+    public List<Button> startButton;
+
+    [Header("Later Use")]
+    public List<GameObject> hiddenItem;
+    
     public void GoToSceneName(string sceneName){
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void ButtonColorGreen(Button MainButton)
+    {
+        MainButton.image.color = Color.green;
+    }
+
+    public void ButtonColorWhite(Button MainButton)
+    {
+        MainButton.image.color = Color.white;
+    }
+
+
+    public void GoToSceneNameGiven(string sceneName)
+    {
+        startButton[0].gameObject.SetActive(true);
+        startButton[1].gameObject.SetActive(true);
+        startButton[0].onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene(sceneName);
+        });
+
     }
 
     public void GoToSceneID(int sceneID)

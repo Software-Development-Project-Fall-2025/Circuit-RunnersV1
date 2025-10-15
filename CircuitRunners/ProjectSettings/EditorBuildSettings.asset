@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Josh Work Folder/Josh Scene/Scenes/Start Screen.unity
     guid: 1d58e692a5525ea4bbd9e459c6d8829b
+  - enabled: 1
+    path: Assets/Josh Work Folder/Josh Scene/Scenes/Test Map.unity
+    guid: 54d81a0bef29595428d157793587d8e2
   m_configObjects: {}
