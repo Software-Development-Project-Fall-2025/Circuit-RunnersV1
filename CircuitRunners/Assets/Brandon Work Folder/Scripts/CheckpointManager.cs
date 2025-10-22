@@ -45,16 +45,16 @@ public class CheckpointManager : MonoBehaviour
     }
 
     // ------------------------------
-    // Update is called once per frame (kept for parity; not used)
+    // Update is called once per frame (Currently) not used)
     // ------------------------------
     void Update() { }
 
     // ------------------------------
-    // (kept) Draw spheres/lines in editor — now with color key
+    // Draw spheres/lines in editor — now with color key
     // ------------------------------
     void OnDrawGizmos()
     {
-        // Ensure the array matches children even in edit mode (kept)
+        // Ensure the array matches children even in edit mode 
         if (checkpoints == null || checkpoints.Length != transform.childCount)
         {
             checkpoints = new Transform[transform.childCount];
@@ -76,7 +76,7 @@ public class CheckpointManager : MonoBehaviour
 
             Gizmos.DrawSphere(t.position, 0.75f);
 
-            // line to next (kept)
+            // line to 
             int next = (i + 1 < checkpoints.Length) ? i + 1 : -1;
             if (next != -1 && checkpoints[next] != null)
             {
@@ -87,7 +87,7 @@ public class CheckpointManager : MonoBehaviour
     }
 
     // ------------------------------
-    // (kept) Highlight when the parent is selected
+    // Highlight when the parent is selected
     // ------------------------------
     void OnDrawGizmosSelected()
     {
