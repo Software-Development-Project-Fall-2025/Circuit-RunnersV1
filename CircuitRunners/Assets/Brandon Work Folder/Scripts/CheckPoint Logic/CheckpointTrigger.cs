@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /*
 CheckpointTrigger
@@ -7,37 +8,77 @@ CheckpointTrigger
 - Put this on the TRIGGER COLLIDER object under each checkpoint (arch-child).
 - It notifies CarProgress when a car passes, and plays a visual cue on the QUAD panel.
 
-Visual cue (fade):
+Visual cue (pulse glow):
 - Assign "optionalVisual" to the QUAD's MeshRenderer (not the arch).
-- The Quad's material MUST be URP/Unlit with Surface=Transparent and Render Face=Both.
-- This script fades the Quad to alpha=0 (in a color that depends on the checkpoint type) and back.
+- The Quad's material MUST be URP/Unlit with:
+    Surface = Transparent, Blending = Additive, Render Face = Both
+- This script briefly PULSES brightness (good with a Bloom volume), keeping the quad see-through.
 
 Color policy:
 - Start      => green
 - Pre-Finish => blue/cyan
 - Others     => yellow
 (You can override per checkpoint via 'overrideFadeColor' if you want a custom hue.)
+
+Quality-of-life:
+- rehitCooldown prevents spammy re-triggers from the same car if it lingers in the gate.
+- hideAfterHitSeconds makes top-down views cleaner by hiding arches/rings after they’re triggered.
 */
 
 [RequireComponent(typeof(Collider))]
 public class CheckpointTrigger : MonoBehaviour
 {
+    // -------------------------------
     // References
+    // -------------------------------
     public CheckpointManager manager;    // drag the CheckPoints parent here
     public int checkpointIndex = 0;      // set index in the Inspector to match order
 
-    // Visuals (Quad fade)
+    // -------------------------------
+    // Visuals (Quad pulse)
+    // -------------------------------
     [Header("Visual cue (QUAD only)")]
-    [Tooltip("QUAD MeshRenderer to fade on hit (NOT the arch).")]
+    [Tooltip("QUAD MeshRenderer to glow on hit (NOT the arch).")]
     public Renderer optionalVisual;
 
-    [Tooltip("Seconds for fade-out and fade-in each.")]
-    public float fadeDuration = 0.25f;
+    [Tooltip("Seconds for one pulse (0..peak..0).")]
+    public float pulseDuration = 0.25f;
+
+    [Tooltip("Brightness multiplier at pulse peak (works best with Bloom).")]
+    public float pulsePeakMultiplier = 3f;
 
     [Tooltip("Optional hard override. If alpha <= 0, auto-picks Start/PreFinish/Others colors.")]
     public Color overrideFadeColor = new Color(0, 0, 0, 0);
 
-    private bool flashing;   // prevent overlapping fades
+    // -------------------------------
+    // Visuals (Hide after hit)
+    // -------------------------------
+    [Header("Hide after hit (top-down)")]
+    [Tooltip("If > 0, disable visual renderers this many seconds after a hit. If == 0, hide immediately. If < 0, never hide.")]
+    public float hideAfterHitSeconds = 0.0f;
+
+    [Tooltip("Renderers that make up the arch/ring visuals to hide.")]
+    public Renderer[] renderersToHide;
+
+    [Tooltip("If true, visuals re-enable when this object is enabled (useful on race reset).")]
+    public bool restoreOnEnable = true;
+
+    void OnEnable()
+    {
+        if (restoreOnEnable && renderersToHide != null)
+            foreach (var r in renderersToHide)
+                if (r) r.enabled = true;
+    }
+
+    // -------------------------------
+    // Debounce (rehit cooldown)
+    // -------------------------------
+    [Header("Hit debounce")]
+    [Tooltip("Ignore repeated hits from the same car within this many seconds.")]
+    public float rehitCooldown = 0.5f;
+
+    private readonly Dictionary<CarProgress, float> _lastHitTime = new();
+    private bool flashing;   // prevent overlapping pulses
 
     void Reset()
     {
@@ -54,59 +95,75 @@ public class CheckpointTrigger : MonoBehaviour
 
         if (manager == null) manager = FindObjectOfType<CheckpointManager>();
 
-        // 1) Report progress
+        // Debounce: ignore rapid re-hits of the same gate by the same car
+        if (_lastHitTime.TryGetValue(car, out var lastT) && Time.time - lastT < rehitCooldown)
+            return;
+        _lastHitTime[car] = Time.time;
+
+        // 1) Report progress to the car
         car.OnPassedCheckpoint(checkpointIndex, transform.position);
 
-        // 2) Play Quad fade (if assigned)
+        // 2) Visual pulse (if assigned)
         if (optionalVisual != null && !flashing)
-            StartCoroutine(FadeQuad(optionalVisual));
+            StartCoroutine(PulseQuad(optionalVisual, pulsePeakMultiplier));
+
+        // 3) Hide after hit (optional)
+        if (hideAfterHitSeconds >= 0f)
+            StartCoroutine(HideAfterDelay(hideAfterHitSeconds));
+        Debug.Log("Checkpoint Reached!" + checkpointIndex);
     }
 
-    // Smooth fade-out / fade-in on the QUAD's material color/alpha
-    private IEnumerator FadeQuad(Renderer r)
+    // ----------------------------------------------------
+    // Pulse the QUAD: 0 -> bright -> 0 (additive glow)
+    // - Keeps alpha constant (so it's always see-through)
+    // ----------------------------------------------------
+    private IEnumerator PulseQuad(Renderer r, float peakMultiplier)
     {
         flashing = true;
 
-        var mat = r.material;            // material instance (not shared)
-        Color startColor = mat.color;    // original color/alpha, to restore
-        float a0 = startColor.a;
+        var mat = r.material; // per-instance material
+        Color start = mat.HasProperty("_BaseColor") ? mat.GetColor("_BaseColor") : mat.color;
+        float startAlpha = start.a;
 
-        // Pick the visual color for the fade "tint" (alpha will go to 0 in-between)
-        Color colorForThis;
+        // Pick tint for this checkpoint (alpha kept from start color)
+        Color tint;
         if (overrideFadeColor.a > 0f)
-        {
-            colorForThis = new Color(overrideFadeColor.r, overrideFadeColor.g, overrideFadeColor.b, 0f);
-        }
+            tint = new Color(overrideFadeColor.r, overrideFadeColor.g, overrideFadeColor.b, startAlpha);
         else
         {
-            if (checkpointIndex == manager.startIndex)             colorForThis = new Color(0f, 1f, 0f, 0f);    // green
-            else if (checkpointIndex == manager.preFinishIndex)    colorForThis = new Color(0.2f, 0.7f, 1f, 0f); // blue/cyan
-            else                                                   colorForThis = new Color(1f, 0.85f, 0f, 0f);  // yellow
+            if (checkpointIndex == manager.startIndex) tint = new Color(0f, 1f, 0f, startAlpha);     // green
+            else if (checkpointIndex == manager.preFinishIndex) tint = new Color(0.2f, 0.7f, 1f, startAlpha);  // blue/cyan
+            else tint = new Color(1f, 0.85f, 0f, startAlpha);   // yellow
         }
 
-        // --- Fade OUT ---
-        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        void SetCol(Color c)
         {
-            float k = t / fadeDuration;
-            // tint toward the chosen color and force alpha down to 0
-            Color c = Color.Lerp(startColor, colorForThis, k);
-            c.a = Mathf.Lerp(a0, 0f, k);
+            if (mat.HasProperty("_BaseColor")) mat.SetColor("_BaseColor", c);
             mat.color = c;
+        }
+
+        for (float t = 0; t < pulseDuration; t += Time.deltaTime)
+        {
+            float k = Mathf.Sin((t / pulseDuration) * Mathf.PI);
+            float mul = Mathf.Lerp(1f, peakMultiplier, k);
+            Color outCol = Color.Lerp(start, tint, 0.4f) * mul;
+            outCol.a = startAlpha;
+            SetCol(outCol);
             yield return null;
         }
 
-        // --- Fade IN ---
-        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
-        {
-            float k = t / fadeDuration;
-            Color c = Color.Lerp(colorForThis, startColor, k);
-            c.a = Mathf.Lerp(0f, a0, k);
-            mat.color = c;
-            yield return null;
-        }
-
-        // restore exactly
-        mat.color = startColor;
+        SetCol(start);
         flashing = false;
+    }
+
+    // -------------------------------
+    // Hide visuals after delay
+    // -------------------------------
+    private IEnumerator HideAfterDelay(float delay)
+    {
+        if (delay > 0f) yield return new WaitForSeconds(delay);
+        if (renderersToHide != null)
+            foreach (var r in renderersToHide)
+                if (r) r.enabled = false;
     }
 }

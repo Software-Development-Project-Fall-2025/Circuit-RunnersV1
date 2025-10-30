@@ -16,7 +16,6 @@ Notes:
 */
 
 [RequireComponent(typeof(Collider))]  // car needs a collider to hit trigger gates
-
 public class CarProgress : MonoBehaviour
 {
     // -------------------------------

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 /*
 CheckpointManager
@@ -10,6 +13,7 @@ CheckpointManager
 - Uses lap-rule indices (Start and Pre-Finish for recording).
 - Draws gizmos in Scene view so the path is obvious.
 - Keeps an optional list of racers (so other systems can query everyone).
+- NEW: Added ContextMenu + OnValidate to auto-renumber checkpoints in edit mode.
 */
 
 public class CheckpointManager : MonoBehaviour
@@ -19,6 +23,7 @@ public class CheckpointManager : MonoBehaviour
     // ===============================
     [Header("Auto")]
     public Transform[] checkpoints;   // filled from transform children (order in hierarchy matters)
+    public Transform checkpointsParent; // optional: assign to "CheckPoints" child if nested
 
     // ===============================
     // Lap Rules (simple + robust)
@@ -43,7 +48,7 @@ public class CheckpointManager : MonoBehaviour
     // ===============================
     void Start()
     {
-        // Auto-fill from children (keeps workflow simple: drag empties in the scene, no manual array setup)
+        // Auto-fill from children (keeps workflow simple)
         checkpoints = new Transform[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -56,8 +61,40 @@ public class CheckpointManager : MonoBehaviour
         else preFinishIndex = 0;
     }
 
+    // ===============================
     // (kept for parity; currently unused)
+    // ===============================
     void Update() { }
+
+    // ===============================
+    // Context Menu Utility (Editor)
+    // ===============================
+    [ContextMenu("Renumber Checkpoints")]
+    public void RenumberCheckpoints()
+    {
+        // Prefer an explicit checkpointsParent, fallback to self
+        var parent = checkpointsParent ? checkpointsParent : transform;
+        int idx = 0;
+
+        foreach (Transform t in parent)
+        {
+            var trig = t.GetComponentInChildren<CheckpointTrigger>();
+            if (trig) trig.checkpointIndex = idx;
+            idx++;
+        }
+
+        startIndex = 0;
+        preFinishIndex = Mathf.Max(0, idx - 2);
+        Debug.Log($"[CheckpointManager] Renumbered {idx} checkpoints.");
+    }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        // Auto-renumber when editing hierarchy (non-runtime)
+        if (!Application.isPlaying) RenumberCheckpoints();
+    }
+#endif
 
     // ===============================
     // Gizmos (always-on path hints)
@@ -96,7 +133,6 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 
-    // (extra highlight when the parent is selected)
     void OnDrawGizmosSelected()
     {
         if (checkpoints == null || checkpoints.Length == 0) return;
