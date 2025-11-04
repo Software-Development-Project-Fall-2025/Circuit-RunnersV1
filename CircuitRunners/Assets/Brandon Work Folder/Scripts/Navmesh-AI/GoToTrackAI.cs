@@ -1,55 +1,83 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
+/*
+ GoToTrack (infinite loop)
+ -------------------------
+ - Minimal waypoint follower for bots.
+ - Marches child -> child under `targets` and loops forever.
+ - Starts at the closest child to reduce weird first turns.
+*/
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class GoToTrackAI : MonoBehaviour
 {
-    public CheckpointManager checkpointManager;   // auto-found if left empty
-    public CarProgress carProgress;               // auto-found if left empty
+    [Header("Waypoints parent")]
+    public Transform targets;                  // parent whose children are the waypoints (e.g., CPContainer)
 
-    [Header("Tuning")]
-    public float nextPointThreshold = 0.75f;      // how close is “reached”
-    public float agentSpeed = 8f;
+    [Header("Movement")]
+    public float speed = 3.5f;                 // NavMeshAgent speed
+    public float arriveDistance = 3f;          // how close counts as "reached"
 
     private NavMeshAgent agent;
-    private int targetIndex = -1;
+    private int childIndex = 0;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = agentSpeed;
+        agent.speed = speed;
+        agent.stoppingDistance = 0f;           // don't stop early
         agent.autoBraking = true;
     }
 
     void Start()
     {
-        if (!checkpointManager) checkpointManager = FindObjectOfType<CheckpointManager>();
-        if (!carProgress) carProgress = GetComponent<CarProgress>();
-        PickNextTarget(true);
+        if (!targets || targets.childCount == 0)
+        {
+            Debug.LogWarning($"{name}: GoToTrack has no targets assigned or empty parent.");
+            enabled = false;
+            return;
+        }
+
+        // Start at the closest child for a smooth first leg
+        childIndex = FindClosestChildIndex();
+        SetDestinationToChild(childIndex);
     }
 
     void Update()
     {
-        if (checkpointManager == null || checkpointManager.checkpoints == null || checkpointManager.checkpoints.Length == 0)
-            return;
+        if (!targets || targets.childCount == 0) return;
 
-        if (!agent.pathPending && agent.remainingDistance <= nextPointThreshold)
-            PickNextTarget(false);
+        // Advance when close enough, always modulo count (infinite loop)
+        if (!agent.pathPending && agent.remainingDistance <= arriveDistance)
+        {
+            childIndex = (childIndex + 1) % targets.childCount;
+            SetDestinationToChild(childIndex);
+        }
+
+        // Keep pushing the current dest so we don't idle near the node
+        if (!agent.hasPath) SetDestinationToChild(childIndex);
     }
 
-    private void PickNextTarget(bool firstPick)
+    // --- helpers ---
+    void SetDestinationToChild(int idx)
     {
-        int n = checkpointManager.checkpoints.Length;
-        if (n == 0) return;
+        if (idx < 0 || idx >= targets.childCount) return;
+        var p = targets.GetChild(idx).position;
+        agent.destination = p;
+    }
 
-        if (firstPick || carProgress == null || carProgress.lastCheckpointIndex < 0)
-            targetIndex = checkpointManager.startIndex;
-        else
-            targetIndex = (carProgress.lastCheckpointIndex + 1) % n;
+    int FindClosestChildIndex()
+    {
+        int best = 0;
+        float bestDist = float.MaxValue;
+        Vector3 pos = transform.position;
 
-        var t = checkpointManager.checkpoints[targetIndex];
-        if (t) agent.SetDestination(t.position);
+        for (int i = 0; i < targets.childCount; i++)
+        {
+            float d = (targets.GetChild(i).position - pos).sqrMagnitude;
+            if (d < bestDist) { bestDist = d; best = i; }
+        }
+        return best;
     }
 }

@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 1730172438460903460}
   - component: {fileID: 5258092063881120498}
   - component: {fileID: 1231365317634982189}
-  - component: {fileID: 8168129219302681148}
   - component: {fileID: 3473832151356292909}
   m_Layer: 0
   m_Name: CPArch
@@ -192,27 +191,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8799704334434963231, guid: ee05a77639c729f448c842f5462f0b4b, type: 3}
---- !u!65 &8168129219302681148
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6661606453547014999}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15.000001, y: 5.9379716, z: 1.9349998}
-  m_Center: {x: -0.0000000023264843, y: 2.9689858, z: -0.00000017226513}
 --- !u!114 &3473832151356292909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,7 +206,14 @@ MonoBehaviour:
   manager: {fileID: 0}
   checkpointIndex: 0
   optionalVisual: {fileID: 3639505732905247219}
-  pulseDuration: 0.25
-  pulsePeakMultiplier: 3
-  overrideFadeColor: {r: 0, g: 0, b: 0, a: 0}
+  ringIdleAlpha: 0.02
+  ringGlowMultiplier: 3
+  ringGlowSeconds: 0.25
+  ringFadeBackSeconds: 0.35
+  renderersToHide: []
+  hideAfterHitSeconds: 0
+  archFadeSeconds: 0.6
+  restoreOnEnable: 1
+  permanentHideWhenPlayerHitsStart: 0
+  playerTag: Player
   rehitCooldown: 0.5

@@ -45,32 +45,21 @@ public class CarProgress : MonoBehaviour
 
     void Start()
     {
-        // Auto-find manager if not assigned (good for quick tests)
         if (checkpointManager == null)
             checkpointManager = FindObjectOfType<CheckpointManager>();
-
-        // Register so the race UI / standings can query everyone if needed
         checkpointManager.RegisterRacer(this);
     }
 
-    /*
-    OnPassedCheckpoint
-    ------------------
-    - Called by CheckpointTrigger when this car passes a gate.
-    - cpIndex: the index of the checkpoint we just hit (0..N-1)
-    - cpPos:   world position of the checkpoint (not used for logic, useful for debug)
-    */
+    // Called by CheckpointTrigger when this car passes a gate.
     public void OnPassedCheckpoint(int cpIndex, Vector3 cpPos)
     {
-        // 1) Backwards / out-of-order guard (prevents "Start farming" and silly reverse laps)
+        // 1) Backwards / out-of-order guard
         if (enforceSequentialOrder && lastCheckpointIndex != -1)
         {
             int total = checkpointManager.checkpoints.Length;
             int expectedNext = (lastCheckpointIndex + 1) % total;
-
             if (cpIndex != expectedNext)
             {
-                // Ignore hits that aren't the next checkpoint in sequence
                 Debug.Log($"{name} out-of-order hit (cp={cpIndex}, expected={expectedNext}) → ignored.");
                 return;
             }
@@ -81,14 +70,11 @@ public class CarProgress : MonoBehaviour
         lastCheckpointIndex = cpIndex;
         lastCheckpointTime = Time.time;
 
-        // 3) Pre-finish bookkeeping:
-        // we allow missing intermediate checkpoints (professor's note),
-        // BUT to count a lap the car must touch Pre-Finish at some point before Start.
+        // 3) Pre-finish bookkeeping
         if (cpIndex == checkpointManager.preFinishIndex)
             touchedPreFinishSinceLastStart = true;
 
-        // 4) Lap counting rule:
-        // Count a lap when we hit Start AND we had previously touched the Pre-Finish.
+        // 4) Lap counting rule
         if (cpIndex == checkpointManager.startIndex && touchedPreFinishSinceLastStart)
         {
             lapsCompleted++;
@@ -96,8 +82,7 @@ public class CarProgress : MonoBehaviour
             Debug.Log($"[{name}] LAP +1  => {lapsCompleted}");
         }
 
-        // 5) Continuous progress score for standings:
-        // score = laps*BIG + cpIndex*MED + fractional progress toward next checkpoint
+        // 5) Continuous progress score for standings
         int n = checkpointManager.checkpoints.Length;
         int next = (cpIndex + 1) % n;
 
@@ -107,8 +92,16 @@ public class CarProgress : MonoBehaviour
             checkpointManager.checkpoints[next].position));
 
         float frac = 1f - Mathf.Clamp01(toNext / segLen);  // 0..1 in the current segment
-
-        // Weights: laps dominate >> cp index >> fractional distance (tiebreaker)
         progressScore = lapsCompleted * 10000f + cpIndex * 100f + frac * 100f;
+    }
+
+    // Utility used by Restart
+    public void ResetProgress()
+    {
+        lapsCompleted = 0;
+        lastCheckpointIndex = -1;
+        lastCheckpointTime = 0f;
+        touchedPreFinishSinceLastStart = false;
+        progressScore = 0f;
     }
 }
