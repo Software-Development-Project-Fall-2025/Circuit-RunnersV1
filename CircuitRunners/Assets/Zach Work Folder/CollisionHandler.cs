@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
 {
-    public float bounceForce = 1000f;    
+    public float bounceForce = 100f;    
     public float upwardForce = 200f;     
     public string[] collisionTags = { "Wall", "Car" };  
 
@@ -16,7 +16,6 @@ public class CollisionHandler : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        //CarController carController = collision.gameObject.GetComponent<CarController>();
 
         Debug.Log("SHOULD BE ENTERING COLLISION");
         bool isValidCollision = false;
@@ -24,6 +23,7 @@ public class CollisionHandler : MonoBehaviour
         {
             if (collision.gameObject.CompareTag(tag))
             {
+                Debug.Log("Is this valid?");
                 isValidCollision = true;
                 break;
             }
@@ -53,8 +53,8 @@ public class CollisionHandler : MonoBehaviour
         rb.velocity = Vector3.zero;  
         rb.angularVelocity = Vector3.zero;  
 
-        float crashForce = 2000f;  
-        rb.AddForce(violentlyBackwards * crashForce, ForceMode.Impulse);  
+        float crashForce = 200f;  
+        //rb.AddForce(violentlyBackwards * crashForce, ForceMode.Impulse);  
 
         
     }

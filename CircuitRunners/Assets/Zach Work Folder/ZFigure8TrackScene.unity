@@ -982,6 +982,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1139,6 +1144,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1431,6 +1441,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free_obs (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026222739917526287, guid: 7f98c8176bfca7347b11006aac2c90ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 1530410600438035674, guid: 7f98c8176bfca7347b11006aac2c90ce,
         type: 3}
@@ -1790,6 +1805,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1882,6 +1902,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2600,6 +2625,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tire_free_obs (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2698,6 +2728,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tire_free_obs (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3095,6 +3130,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 1026222739917526287, guid: 7f98c8176bfca7347b11006aac2c90ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 1530410600438035674, guid: 7f98c8176bfca7347b11006aac2c90ce,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3439,6 +3479,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12648,6 +12693,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tire_free_obs (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12736,6 +12786,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12981,6 +13036,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13208,6 +13268,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13459,6 +13524,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tire_free_obs (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13558,6 +13628,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tire_free_obs (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13646,6 +13721,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14680,6 +14760,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15252,6 +15337,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15639,6 +15729,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15741,6 +15836,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tire_free_obs (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16036,6 +16136,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17289,6 +17394,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17484,6 +17594,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tire_free_obs
       objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17567,6 +17682,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free_obs (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026222739917526287, guid: 7f98c8176bfca7347b11006aac2c90ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 1530410600438035674, guid: 7f98c8176bfca7347b11006aac2c90ce,
         type: 3}
@@ -17856,7 +17976,8 @@ GameObject:
   - component: {fileID: 1484013680}
   - component: {fileID: 1484013679}
   - component: {fileID: 1484013678}
-  m_Layer: 0
+  - component: {fileID: 1484013682}
+  m_Layer: 6
   m_Name: MotorSphere
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -17903,7 +18024,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!135 &1484013679
 SphereCollider:
@@ -17933,7 +18054,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484013676}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -17976,6 +18097,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484013676}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1484013682
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484013676}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 63
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.716919, y: 1.1860442, z: 4.4541626}
+  m_Center: {x: 0.018676758, y: 0.4581194, z: -0.009552002}
 --- !u!114 &1491630255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18239,6 +18381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fence_concrete_free (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18601,6 +18748,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tire_free_obs (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20390,6 +20542,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tire_free_obs (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20836,6 +20993,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20998,6 +21160,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tire_free_obs (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373798459345739174, guid: 0a9f73a18c612c34a9773c0dd0fae0ab,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21990,6 +22157,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fence_concrete_free_obs (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1026222739917526287, guid: 7f98c8176bfca7347b11006aac2c90ce,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 1530410600438035674, guid: 7f98c8176bfca7347b11006aac2c90ce,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -22056,6 +22228,7 @@ GameObject:
   - component: {fileID: 2127404440}
   - component: {fileID: 2127404441}
   - component: {fileID: 2127404442}
+  - component: {fileID: 2127404443}
   m_Layer: 0
   m_Name: Car
   m_TagString: Car
@@ -22092,8 +22265,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68132e23718d74b69a0e99aab48f5563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
   maxSpeed: 40
-  turnSpeed: 120
+  turnSpeed: 240
   baseAcceleration: 125
   lateralForce: 40
   driftFactor: 0.8
@@ -22130,10 +22304,27 @@ BoxCollider:
   m_LayerOverridePriority: 1
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1.737915, y: 0.58717597, z: 4.7614746}
-  m_Center: {x: -0.04168701, y: -0.20641202, z: -0.011169434}
+  m_Size: {x: 1.8736572, y: 1.5, z: 4.7614746}
+  m_Center: {x: 0.026184082, y: 0.25, z: -0.011169434}
+--- !u!114 &2127404443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127404439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8851df30ef0cb08c1bdbb861dec2d737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceForce: 10
+  upwardForce: 200
+  collisionTags:
+  - Wall
+  - Car
 --- !u!1 &2143586965
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class CarController : MonoBehaviour {
     private float moveInput;
     private float turnInput;
 
+
     public float health = 100f;
     public float maxSpeed = 40f;
     public float turnSpeed = 120f;
@@ -62,7 +63,7 @@ public class CarController : MonoBehaviour {
         transform.position = sphereRB.transform.position;
 
         // I swear this makes it drive better although it does a stupid lil nose dip
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(sphereRB.velocity.normalized, Vector3.up), Time.fixedDeltaTime * 2f);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(sphereRB.velocity.normalized, Vector3.up), Time.fixedDeltaTime * 2f);
 
 
         Vector3 forward = Vector3.ProjectOnPlane(transform.forward, Vector3.up).normalized;
@@ -97,8 +98,6 @@ public class CarController : MonoBehaviour {
             {
                 isOnRoad = true;
             }
-            // You can add debug visuals
-            // Debug.DrawLine(transform.position + Vector3.up * 0.5f, hit.point, isOnRoad ? Color.green : Color.red);
         }
 
         float currentGripMultiplier = isOnRoad ? roadGripMultiplier : grassGripMultiplier;
