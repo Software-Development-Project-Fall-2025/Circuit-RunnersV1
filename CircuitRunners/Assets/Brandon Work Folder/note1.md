@@ -1,0 +1,3 @@
+- add script that checkpoint circles look at object/target(use lookAt function) for view help, to handle angling for the top down view (just need to give it a target to look at )
+- find game object, with name target..... 
+- can also have them lookat camera and decide which one looks/works better for game 
