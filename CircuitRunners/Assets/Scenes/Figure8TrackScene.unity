@@ -758,7 +758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 95385113}
   - component: {fileID: 95385114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Side Object 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -951,7 +951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 137615582}
   - component: {fileID: 137615583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Side Object 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2594,7 +2594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 423337577}
   - component: {fileID: 423337578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Side Object 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3234,54 +3234,6 @@ MonoBehaviour:
   ignore: 0
   backupObject: {fileID: 0}
   terrain: {fileID: 0}
---- !u!28 &563964618
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 2
-  m_Width: 12
-  m_Height: 12
-  m_CompleteImageSize: 760
-  m_MipsStripped: 0
-  m_TextureFormat: 4
-  m_MipCount: 4
-  m_IsReadable: 1
-  m_IsPreProcessed: 0
-  m_IgnoreMipmapLimit: 0
-  m_MipmapLimitGroupName: 
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_VTOnly: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  m_PlatformBlob: 
-  image data: 760
-  _typelessdata: 0000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc0000000000000000000000000000000000000000ffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffcc0000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc000000000000000000000000000000000000000000000000000000007f7f7f667f7f7f66000000000000000000000000000000007f7f7f667f7f7f6600000000000000007f7f7f667f7f7f66bfbfbf99bfbfbf997f7f7f667f7f7f667f7f7f667f7f7f66bfbfbf99bfbfbf997f7f7f667f7f7f6600000000000000007f7f7f667f7f7f66000000000000000000000000000000007f7f7f667f7f7f660000000000000000000000007f7f7f66000000007f7f7f66bfbfbf997f7f7f66000000007f7f7f6600000000bfbfbf99
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!1001 &573485283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3384,7 +3336,7 @@ GameObject:
   - component: {fileID: 574770985}
   - component: {fileID: 574770984}
   - component: {fileID: 574770983}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Figure8Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12575,6 +12527,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 575689037}
   m_PrefabAsset: {fileID: 0}
+--- !u!28 &579143106
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 2
+  m_Width: 2
+  m_Height: 2
+  m_CompleteImageSize: 20
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 2
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 0
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 20
+  _typelessdata: 414141ff414141ff414141ff414141ff414141ff
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1001 &582684739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12898,54 +12898,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 605489018}
   m_PrefabAsset: {fileID: 0}
---- !u!28 &607806253
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 2
-  m_Width: 2
-  m_Height: 2
-  m_CompleteImageSize: 20
-  m_MipsStripped: 0
-  m_TextureFormat: 4
-  m_MipCount: 2
-  m_IsReadable: 1
-  m_IsPreProcessed: 0
-  m_IgnoreMipmapLimit: 0
-  m_MipmapLimitGroupName: 
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_VTOnly: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  m_PlatformBlob: 
-  image data: 20
-  _typelessdata: 4d4d4dff4d4d4dff4d4d4dff4d4d4dff4d4d4dff
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!4 &630838316 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400010, guid: 9f48272470ebc4641a8f48ebc7ef4be1,
@@ -13027,6 +12979,54 @@ MonoBehaviour:
   endSplinePointIndexes: 
   startSplinePointIndexesMirrored: 
   endSplinePointIndexesMirrored: 
+--- !u!28 &688439298
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 2
+  m_Width: 2
+  m_Height: 2
+  m_CompleteImageSize: 20
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 2
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 0
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 20
+  _typelessdata: 4d4d4dff4d4d4dff4d4d4dff4d4d4dff4d4d4dff
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!1001 &699636350
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13133,9 +13133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853bb178efb910248ab579a2018ce28c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fwdSpeed: 200
-  turnSpeed: 200
-  sphereRB: {fileID: 316487730}
 --- !u!4 &717191473
 Transform:
   m_ObjectHideFlags: 0
@@ -14568,7 +14565,7 @@ GameObject:
   - component: {fileID: 972724029}
   - component: {fileID: 972724028}
   - component: {fileID: 972724027}
-  m_Layer: 31
+  m_Layer: 6
   m_Name: surface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15102,6 +15099,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1019542895}
   m_PrefabAsset: {fileID: 0}
+--- !u!28 &1045476594
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 2
+  m_Width: 10
+  m_Height: 2
+  m_CompleteImageSize: 112
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 4
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 0
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 112
+  _typelessdata: ffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffcc
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!114 &1053350971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15809,7 +15854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1295961966}
   - component: {fileID: 1295961967}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Side Object 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16214,6 +16259,54 @@ Transform:
   - {fileID: 133973194}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!28 &1362590698
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 2
+  m_Width: 12
+  m_Height: 12
+  m_CompleteImageSize: 760
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 4
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 0
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 760
+  _typelessdata: 0000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc0000000000000000000000000000000000000000ffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffcc0000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc00000000000000000000000000000000000000000000000000000000000000000000000000000000ffffffccffffffcc000000000000000000000000000000000000000000000000000000007f7f7f667f7f7f66000000000000000000000000000000007f7f7f667f7f7f6600000000000000007f7f7f667f7f7f66bfbfbf99bfbfbf997f7f7f667f7f7f667f7f7f667f7f7f66bfbfbf99bfbfbf997f7f7f667f7f7f6600000000000000007f7f7f667f7f7f66000000000000000000000000000000007f7f7f667f7f7f660000000000000000000000007f7f7f66000000007f7f7f66bfbfbf997f7f7f66000000007f7f7f6600000000bfbfbf99
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!114 &1365855585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16845,7 +16938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1404726464}
   - component: {fileID: 1404726465}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Side Object 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17292,54 +17385,6 @@ MonoBehaviour:
   rotationCenter: 0
   side: 0
   otherSide: {fileID: 0}
---- !u!28 &1456035893
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 2
-  m_Width: 10
-  m_Height: 2
-  m_CompleteImageSize: 112
-  m_MipsStripped: 0
-  m_TextureFormat: 4
-  m_MipCount: 4
-  m_IsReadable: 1
-  m_IsPreProcessed: 0
-  m_IgnoreMipmapLimit: 0
-  m_MipmapLimitGroupName: 
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_VTOnly: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  m_PlatformBlob: 
-  image data: 112
-  _typelessdata: ffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffccffffffcc
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!114 &1491630255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17379,54 +17424,6 @@ MonoBehaviour:
   rotationCenter: 0
   side: 0
   otherSide: {fileID: 0}
---- !u!28 &1515398328
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 2
-  m_Width: 2
-  m_Height: 2
-  m_CompleteImageSize: 20
-  m_MipsStripped: 0
-  m_TextureFormat: 4
-  m_MipCount: 2
-  m_IsReadable: 1
-  m_IsPreProcessed: 0
-  m_IgnoreMipmapLimit: 0
-  m_MipmapLimitGroupName: 
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_VTOnly: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  m_PlatformBlob: 
-  image data: 20
-  _typelessdata: 414141ff414141ff414141ff414141ff414141ff
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!114 &1553638492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17862,7 +17859,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1655237798}
   - component: {fileID: 1655237799}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Side Object 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17917,54 +17914,6 @@ MonoBehaviour:
   distances: []
   locked: 0
   sectionEndIndexes: 
---- !u!28 &1674614286
-Texture2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 2
-  m_Width: 2
-  m_Height: 2
-  m_CompleteImageSize: 20
-  m_MipsStripped: 0
-  m_TextureFormat: 4
-  m_MipCount: 2
-  m_IsReadable: 1
-  m_IsPreProcessed: 0
-  m_IgnoreMipmapLimit: 0
-  m_MipmapLimitGroupName: 
-  m_StreamingMipmaps: 0
-  m_StreamingMipmapsPriority: 0
-  m_VTOnly: 0
-  m_AlphaIsTransparency: 0
-  m_ImageCount: 1
-  m_TextureDimension: 2
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 0
-    m_WrapV: 0
-    m_WrapW: 0
-  m_LightmapFormat: 0
-  m_ColorSpace: 1
-  m_PlatformBlob: 
-  image data: 20
-  _typelessdata: 383838ff383838ff383838ff383838ff383838ff
-  m_StreamData:
-    serializedVersion: 2
-    offset: 0
-    size: 0
-    path: 
 --- !u!1001 &1678566277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18202,7 +18151,7 @@ MonoBehaviour:
   m_Script: {fileID: 365290288, guid: f56d46228aee4734f9114056c53bb57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectid: 
+  projectid: 175986656443983
   resourcesFolderName: Resources
   resourcesFullFolderName: 
   runtimeAIFlag: 1
@@ -18764,11 +18713,11 @@ MonoBehaviour:
   infoTexture: {fileID: 0}
   infoTexture2: {fileID: 0}
   infoTextures: []
-  plusSignTexture: {fileID: 563964618}
-  minSignTexture: {fileID: 1456035893}
-  signPostHeaderBG: {fileID: 1674614286}
-  signPostListBG: {fileID: 1515398328}
-  signPostListSelBG: {fileID: 607806253}
+  plusSignTexture: {fileID: 1362590698}
+  minSignTexture: {fileID: 1045476594}
+  signPostHeaderBG: {fileID: 2014830066}
+  signPostListBG: {fileID: 579143106}
+  signPostListSelBG: {fileID: 688439298}
   editorSkin: 0
   showAllPrefabs: 1
   standardPrefabsFlag: 0
@@ -18822,7 +18771,7 @@ MonoBehaviour:
   - {fileID: 524475515}
   terrainSplatTextures:
   - Splat 1 - GrassLayerFigure8
-  activeTerrain: {fileID: 524475515}
+  activeTerrain: {fileID: 0}
   activeTerrainY: -0.02
   selectedTerrain: 0
   selectedRoadsOnly: 0
@@ -20035,7 +19984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1993502634}
   - component: {fileID: 1993502635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Side Object 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20259,6 +20208,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1996051313}
   m_PrefabAsset: {fileID: 0}
+--- !u!28 &2014830066
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 2
+  m_Width: 2
+  m_Height: 2
+  m_CompleteImageSize: 20
+  m_MipsStripped: 0
+  m_TextureFormat: 4
+  m_MipCount: 2
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 0
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 20
+  _typelessdata: 383838ff383838ff383838ff383838ff383838ff
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
 --- !u!114 &2019481542
 MonoBehaviour:
   m_ObjectHideFlags: 0
