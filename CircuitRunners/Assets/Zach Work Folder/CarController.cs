@@ -73,9 +73,14 @@ public class CarController : MonoBehaviour {
         float speedPercent = Mathf.Clamp01(Mathf.Abs(forwardSpeed) / maxSpeed);
 
         // Smooths input
-        float tau = moveInput != 0f ? riseResponse : fallResponse;
-        float alpha = 1f - Mathf.Exp(-Time.fixedDeltaTime / tau);
-        moveIntensity += (moveInput - moveIntensity) * alpha;
+        if (moveInput >= 0) {
+            float tau = moveInput != 0f ? riseResponse : fallResponse;
+            float alpha = 1f - Mathf.Exp(-Time.fixedDeltaTime / tau);
+            moveIntensity += (moveInput - moveIntensity) * alpha;
+        }
+        else if(moveInput <= 0) {
+            // Test cause push
+        }
 
         float accelMultiplier = magicTranny(speedPercent);
         float rawForce = moveIntensity * baseAcceleration * accelMultiplier;
