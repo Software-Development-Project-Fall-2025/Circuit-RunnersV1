@@ -11,6 +11,7 @@ public class CollisionHandler : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Start function");
         rb = GetComponent<Rigidbody>();
         carController = GetComponent<CarController>();
     }

@@ -44,11 +44,11 @@ public class CarController : MonoBehaviour {
     private bool isSpinningOut = false;
     private bool isOnRoad = true;  // Track surface type
 
-    public float raycastDistance = 1f;  // How far down to check
-    public LayerMask roadLayer;         // Set this in inspector to road layer
-    public LayerMask grassLayer;        // Set this in inspector to grass layer
+    public float raycastDistance = 1f; 
+    public LayerMask roadLayer;         
+    public LayerMask grassLayer;       
     public float roadGripMultiplier = 1f;
-    public float grassGripMultiplier = 0.4f;  // Less grip on grass
+    public float grassGripMultiplier = 0.4f; 
 
     public Rigidbody sphereRB;
 
@@ -73,19 +73,16 @@ public class CarController : MonoBehaviour {
         float speedPercent = Mathf.Clamp01(Mathf.Abs(forwardSpeed) / maxSpeed);
 
         // Smooths input
-        if (moveInput >= 0) {
-            float tau = moveInput != 0f ? riseResponse : fallResponse;
-            float alpha = 1f - Mathf.Exp(-Time.fixedDeltaTime / tau);
-            moveIntensity += (moveInput - moveIntensity) * alpha;
-        }
-        else if(moveInput <= 0) {
-            // Test cause push
-        }
+        float tau = moveInput != 0f ? riseResponse : fallResponse;
+        float alpha = 1f - Mathf.Exp(-Time.fixedDeltaTime / tau);
+        moveIntensity += (moveInput - moveIntensity) * alpha;
+        // Debug.Log("Move Intensity: " + moveIntensity);
 
         float accelMultiplier = magicTranny(speedPercent);
         float rawForce = moveIntensity * baseAcceleration * accelMultiplier;
         float speedLimitFactor = 1f - Mathf.Pow(speedPercent, 4);
         float targetForce = rawForce * speedLimitFactor;
+
 
         if (!(forwardSpeed > maxSpeed && targetForce > 0) &&
             !(forwardSpeed < -maxSpeed * 0.5f && targetForce < 0))
@@ -93,12 +90,11 @@ public class CarController : MonoBehaviour {
             sphereRB.AddForce(forward * targetForce, ForceMode.Acceleration);
         }
 
-        // Check surface type with raycast
+        // Checks surface type with raycast
         RaycastHit hit;
-        isOnRoad = false;  // Reset each frame
+        isOnRoad = false;  
         if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out hit, raycastDistance))
         {
-            // Check if we hit road or grass using layers
             if (roadLayer == (roadLayer | (1 << hit.collider.gameObject.layer)))
             {
                 isOnRoad = true;
