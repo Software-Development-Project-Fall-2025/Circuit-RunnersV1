@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - PlayerCar
+  - Wall
+  - Car
+  - Grass
+  - Road
   layers:
   - Default
   - TransparentFX
@@ -12,7 +15,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - Road
+  - Player
   - 
   - 
   - 
