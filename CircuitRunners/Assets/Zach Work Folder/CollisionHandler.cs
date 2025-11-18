@@ -13,7 +13,7 @@ public class CollisionHandler : MonoBehaviour
     {
         Debug.Log("Start function");
         rb = GetComponent<Rigidbody>();
-        carController = GetComponent<CarController>();
+        carController = gameObject.transform.parent.GetComponent<CarController>();
     }
 
     void OnCollisionEnter(Collision collision) {
@@ -54,8 +54,8 @@ public class CollisionHandler : MonoBehaviour
         rb.velocity = Vector3.zero;  
         rb.angularVelocity = Vector3.zero;  
 
-        float crashForce = 200f;  
-        //rb.AddForce(violentlyBackwards * crashForce, ForceMode.Impulse);  
+        float crashForce = 70f;  
+        rb.AddForce(violentlyBackwards * crashForce, ForceMode.Impulse);  
 
         
     }
