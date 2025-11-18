@@ -15892,7 +15892,7 @@ MonoBehaviour:
   m_Follow: {fileID: 2012149008}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 30
+    OrthographicSize: 20
     NearClipPlane: 0.01
     FarClipPlane: 1000
     Dutch: 0
@@ -17977,6 +17977,7 @@ GameObject:
   - component: {fileID: 1484013679}
   - component: {fileID: 1484013678}
   - component: {fileID: 1484013682}
+  - component: {fileID: 1484013683}
   m_Layer: 6
   m_Name: MotorSphere
   m_TagString: Car
@@ -18118,6 +18119,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.716919, y: 1.1860442, z: 4.4541626}
   m_Center: {x: 0.018676758, y: 0.4581194, z: -0.009552002}
+--- !u!114 &1484013683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484013676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8851df30ef0cb08c1bdbb861dec2d737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceForce: 100
+  upwardForce: 200
+  collisionTags:
+  - Wall
+  - Car
 --- !u!114 &1491630255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18630,7 +18648,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 30
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -22228,7 +22246,6 @@ GameObject:
   - component: {fileID: 2127404440}
   - component: {fileID: 2127404441}
   - component: {fileID: 2127404442}
-  - component: {fileID: 2127404443}
   m_Layer: 0
   m_Name: Car
   m_TagString: Car
@@ -22308,23 +22325,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8736572, y: 1.5, z: 4.7614746}
   m_Center: {x: 0.026184082, y: 0.25, z: -0.011169434}
---- !u!114 &2127404443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2127404439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8851df30ef0cb08c1bdbb861dec2d737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounceForce: 10
-  upwardForce: 200
-  collisionTags:
-  - Wall
-  - Car
 --- !u!1 &2143586965
 GameObject:
   m_ObjectHideFlags: 0
