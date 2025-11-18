@@ -23,8 +23,10 @@ public class CarController : MonoBehaviour {
     private float moveInput;
     private float turnInput;
 
-
     public float health = 100f;
+
+    [SerializeField] private CarSmokeController smokeController;
+
     public float maxSpeed = 40f;
     public float turnSpeed = 120f;
     public float baseAcceleration = 125f;
@@ -42,7 +44,7 @@ public class CarController : MonoBehaviour {
     private float moveIntensity;
     private bool isDrifting = false;
     private bool isSpinningOut = false;
-    private bool isOnRoad = true;  // Track surface type
+    private bool isOnRoad = true;
 
     public float raycastDistance = 1f; 
     public LayerMask roadLayer;         
@@ -54,6 +56,29 @@ public class CarController : MonoBehaviour {
 
     void Start() {
         sphereRB.transform.parent = null;
+
+        // Initialize smoke at full health
+        if (smokeController != null)
+            smokeController.UpdateSmoke(1f);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        if (health < 0f) health = 0f;
+
+        float healthPercent = health / 100f;
+
+        if (smokeController != null)
+            smokeController.UpdateSmoke(healthPercent);
+    }
+
+    void Update()
+    {
+        float healthPercent = health / 100f;
+
+        if (smokeController != null)
+            smokeController.UpdateSmoke(healthPercent);
     }
 
     void FixedUpdate() {
