@@ -357,17 +357,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706028985}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6147227004247183611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160.2, y: 45.0656}
-  m_SizeDelta: {x: 448.9672, y: 235.8689}
+  m_AnchoredPosition: {x: -408.51187, y: 49.983047}
+  m_SizeDelta: {x: 385.0743, y: 224.0425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &706028987
 MonoBehaviour:
@@ -389,8 +389,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cirit Runnder Team\nZack Schupbach - \nConnor Brunner\nBrandon\nGennie\nJoshua
-    Koeppel"
+  m_text: 'Cirit Runnder Team
+
+    Zack Schupbach - Project Lead and Character creation
+
+    Connor
+    Brunner - FX Development
+
+    Brandon - Server iplmentation and AI Development
+
+    Gennie
+    - Enviomental and Audio Design
+
+    Joshua Koeppel - UI Development'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e78ae0c09eda39429d7e98147861349, type: 2}
   m_sharedMaterial: {fileID: -4614957867333712485, guid: 3e78ae0c09eda39429d7e98147861349,
@@ -418,10 +429,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23.7
+  m_fontSizeBase: 26
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -502,8 +513,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.559, y: 13.1574}
-  m_SizeDelta: {x: 1377.6663, y: 620.8027}
+  m_AnchoredPosition: {x: 0.9678, y: 1.8492}
+  m_SizeDelta: {x: 1926.7407, y: 1086.1199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1119488094
 MonoBehaviour:
@@ -570,15 +581,15 @@ RectTransform:
   m_GameObject: {fileID: 1137975823}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6147227004247183611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 233.71637, y: 49.967}
-  m_SizeDelta: {x: 318.5329, y: 236.07}
+  m_AnchoredPosition: {x: 392, y: 61.084}
+  m_SizeDelta: {x: 401.2914, y: 236.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1137975825
 MonoBehaviour:
@@ -645,15 +656,15 @@ RectTransform:
   m_GameObject: {fileID: 1676679058}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6147227004247183611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -232.28528, y: 51.26712}
-  m_SizeDelta: {x: 322.3769, y: 238.6648}
+  m_AnchoredPosition: {x: -408, y: 62.742065}
+  m_SizeDelta: {x: 425.3692, y: 238.6648}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1676679060
 MonoBehaviour:
@@ -705,7 +716,7 @@ GameObject:
   - component: {fileID: 1727717044}
   - component: {fileID: 1727717043}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Text Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -720,14 +731,15 @@ RectTransform:
   m_GameObject: {fileID: 1727717041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7804879698396318194}
   m_Father: {fileID: 6147227004247183611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.2655, y: 233.78851}
+  m_AnchoredPosition: {x: -1.5098, y: 295.61}
   m_SizeDelta: {x: 203.1155, y: 67.102}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1727717043
@@ -793,17 +805,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1764763485}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6147227004247183611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 246.7, y: 138}
-  m_SizeDelta: {x: 320.3512, y: 50}
+  m_AnchoredPosition: {x: 397.0644, y: 59.781235}
+  m_SizeDelta: {x: 385.0743, y: 224.0425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1764763487
 MonoBehaviour:
@@ -825,7 +837,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Assets Used
+  m_text: 'Assets Used
+
+    Low Poly Cars Pack By Vitaly Tyavin
+
+    EasyRoads by
+    AndaSoft
+
+    Environment Track Lowpoly: Cartoon Props Mobile Free by Be Drill
+    Enter
+
+    Halo Circular Brillante PNG by Dibujo Gratis
+
+    Drivable-Free Low
+    Poly Cars by AWBMEGAMES
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e78ae0c09eda39429d7e98147861349, type: 2}
   m_sharedMaterial: {fileID: -4614957867333712485, guid: 3e78ae0c09eda39429d7e98147861349,
@@ -853,10 +880,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23.5
+  m_fontSizeBase: 26
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -1116,8 +1143,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280756194
-  m_fontColor: {r: 0.8867924, g: 0.15477037, b: 0.15477037, a: 1}
+    rgba: 4289848599
+  m_fontColor: {r: 0.09019608, g: 0.8980392, b: 0.69411767, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1216,7 +1243,7 @@ RectTransform:
   m_GameObject: {fileID: 2976349048403090566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 313270735988873998}
@@ -1224,7 +1251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: -233}
+  m_AnchoredPosition: {x: -5.6761, y: -299.94}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2976349048403090566
@@ -1546,7 +1573,6 @@ RectTransform:
   m_Children:
   - {fileID: 1119488093}
   - {fileID: 1727717042}
-  - {fileID: 7804879698396318194}
   - {fileID: 1676679059}
   - {fileID: 706028986}
   - {fileID: 1137975824}
@@ -1629,11 +1655,11 @@ RectTransform:
   m_LocalScale: {x: 1.2121, y: 1.2121, z: 1.2121}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6147227004247183611}
+  m_Father: {fileID: 1727717042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: 230.3}
+  m_AnchoredPosition: {x: 3.734497, y: -3.4885101}
   m_SizeDelta: {x: 336.9123, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8425167558427617557
