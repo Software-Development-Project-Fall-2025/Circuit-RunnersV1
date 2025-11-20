@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Josh Work Folder/Josh Scene/Scenes/Test Map.unity
     guid: 54d81a0bef29595428d157793587d8e2
+  - enabled: 1
+    path: Assets/Minimum Game/ActualFigure8Track.unity
+    guid: 125ae67ff04e2fa6aabaee3e9b24ff63
   m_configObjects: {}
