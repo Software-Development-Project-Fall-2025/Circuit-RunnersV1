@@ -53,7 +53,10 @@ public class CarProgress : MonoBehaviour
     // Called by CheckpointTrigger when this car passes a gate.
     public void OnPassedCheckpoint(int cpIndex, Vector3 cpPos)
     {
+        // Debug.Log("BEFORE"); (Checking Progress/Trigger)
+
         // 1) Backwards / out-of-order guard
+        Debug.Log(enforceSequentialOrder && lastCheckpointIndex != -1);
         if (enforceSequentialOrder && lastCheckpointIndex != -1)
         {
             int total = checkpointManager.checkpoints.Length;
@@ -64,6 +67,8 @@ public class CarProgress : MonoBehaviour
                 return;
             }
         }
+
+        // Debug.Log("AFTER"); (Checking Progress/Trigger after collision)
 
         // 2) Accept this checkpoint
         Debug.Log($"[{name}] hit CP #{cpIndex} at t={Time.time:0.00}s (lap {lapsCompleted})");

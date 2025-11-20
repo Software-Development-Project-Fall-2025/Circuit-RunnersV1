@@ -16,7 +16,7 @@ public class RaceController : MonoBehaviour
     public Button restartButton;                     // Restart button
 
     [Header("Lock controls when PLAYER wins")]
-    public string playerTag = "Player";
+    public string playerTag = "Car";
     public List<Behaviour> componentsToDisableOnWin = new();   // drag PlayerInput/CarController/etc
 
     bool raceOver = false;
@@ -27,7 +27,7 @@ public class RaceController : MonoBehaviour
         if (!checkpointManager) checkpointManager = FindObjectOfType<CheckpointManager>();
         if (!raceHudCanvas) raceHudCanvas = FindObjectOfType<Canvas>();  // best effort
 
-        EnsureOverlay();
+        // EnsureOverlay();
         SetOverlayVisible(false);
     }
 
@@ -108,68 +108,68 @@ public class RaceController : MonoBehaviour
     }
 
     // ------- UI helpers -------
-    void EnsureOverlay()
-    {
-        if (raceHudCanvas && winText && restartButton) { HookRestartButton(); return; }
+    // void EnsureOverlay()
+    // {
+    //     if (raceHudCanvas && winText && restartButton) { HookRestartButton(); return; }
 
-        // Build a small overlay under the RaceHud canvas
-        Canvas targetCanvas = raceHudCanvas ? raceHudCanvas : FindObjectOfType<Canvas>();
-        if (!targetCanvas)
-        {
-            // fallback: make a canvas
-            var go = new GameObject("RaceHud", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
-            raceHudCanvas = targetCanvas = go.GetComponent<Canvas>();
-            targetCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            go.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        }
+    //     // Build a small overlay under the RaceHud canvas
+    //     Canvas targetCanvas = raceHudCanvas ? raceHudCanvas : FindObjectOfType<Canvas>();
+    //     if (!targetCanvas)
+    //     {
+    //         // fallback: make a canvas
+    //         var go = new GameObject("RaceHud", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+    //         raceHudCanvas = targetCanvas = go.GetComponent<Canvas>();
+    //         targetCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+    //         go.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+    //     }
 
-        var panel = new GameObject("WinOverlay", typeof(Image));
-        panel.transform.SetParent(targetCanvas.transform, false);
-        panel.SetActive(false);
-        var img = panel.GetComponent<Image>();
-        img.color = new Color(0, 0, 0, 0.55f);
-        var rt = panel.GetComponent<RectTransform>();
-        rt.anchorMin = new Vector2(0, 0); rt.anchorMax = new Vector2(1, 1);
-        rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
+    //     var panel = new GameObject("WinOverlay", typeof(Image));
+    //     panel.transform.SetParent(targetCanvas.transform, false);
+    //     panel.SetActive(false);
+    //     var img = panel.GetComponent<Image>();
+    //     img.color = new Color(0, 0, 0, 0.55f);
+    //     var rt = panel.GetComponent<RectTransform>();
+    //     rt.anchorMin = new Vector2(0, 0); rt.anchorMax = new Vector2(1, 1);
+    //     rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
 
-        var t = new GameObject("WinText", typeof(TMP_Text));
-        t.transform.SetParent(panel.transform, false);
-        winText = t.GetComponent<TMP_Text>();
-        winText.alignment = TextAlignmentOptions.Center;
-        winText.fontSize = 96; winText.fontStyle = FontStyles.Bold;
-        var tr = t.GetComponent<RectTransform>();
-        tr.anchorMin = new Vector2(0.2f, 0.56f); tr.anchorMax = new Vector2(0.8f, 0.86f);
-        tr.offsetMin = tr.offsetMax = Vector2.zero;
+    //     // var t = new GameObject("WinText", typeof(TMP_Text));
+    //     // t.transform.SetParent(panel.transform, false);
+    //     // winText = t.GetComponent<TMP_Text>();
+    //     // winText.alignment = TextAlignmentOptions.Center;
+    //     // winText.fontSize = 96; winText.fontStyle = FontStyles.Bold;
+    //     // var tr = t.GetComponent<RectTransform>();
+    //     // tr.anchorMin = new Vector2(0.2f, 0.56f); tr.anchorMax = new Vector2(0.8f, 0.86f);
+    //     // tr.offsetMin = tr.offsetMax = Vector2.zero;
 
-        var st = new GameObject("WinSubText", typeof(TMP_Text));
-        st.transform.SetParent(panel.transform, false);
-        winSubText = st.GetComponent<TMP_Text>();
-        winSubText.alignment = TextAlignmentOptions.Center;
-        winSubText.fontSize = 36;
-        var srt = st.GetComponent<RectTransform>();
-        srt.anchorMin = new Vector2(0.2f, 0.45f); srt.anchorMax = new Vector2(0.8f, 0.53f);
-        srt.offsetMin = srt.offsetMax = Vector2.zero;
+    //     // var st = new GameObject("WinSubText", typeof(TMP_Text));
+    //     // st.transform.SetParent(panel.transform, false);
+    //     // winSubText = st.GetComponent<TMP_Text>();
+    //     // winSubText.alignment = TextAlignmentOptions.Center;
+    //     // winSubText.fontSize = 36;
+    //     // var srt = st.GetComponent<RectTransform>();
+    //     // srt.anchorMin = new Vector2(0.2f, 0.45f); srt.anchorMax = new Vector2(0.8f, 0.53f);
+    //     // srt.offsetMin = srt.offsetMax = Vector2.zero;
 
-        var b = new GameObject("RestartButton", typeof(Button), typeof(Image));
-        b.transform.SetParent(panel.transform, false);
-        restartButton = b.GetComponent<Button>();
-        b.GetComponent<Image>().color = new Color(1,1,1,0.9f);
-        var br = b.GetComponent<RectTransform>();
-        br.anchorMin = new Vector2(0.42f, 0.23f); br.anchorMax = new Vector2(0.58f, 0.35f);
-        br.offsetMin = br.offsetMax = Vector2.zero;
+    //     var b = new GameObject("RestartButton", typeof(Button), typeof(Image));
+    //     b.transform.SetParent(panel.transform, false);
+    //     restartButton = b.GetComponent<Button>();
+    //     b.GetComponent<Image>().color = new Color(1,1,1,0.9f);
+    //     var br = b.GetComponent<RectTransform>();
+    //     br.anchorMin = new Vector2(0.42f, 0.23f); br.anchorMax = new Vector2(0.58f, 0.35f);
+    //     br.offsetMin = br.offsetMax = Vector2.zero;
 
-        var label = new GameObject("Label", typeof(TMP_Text));
-        label.transform.SetParent(b.transform, false);
-        var lt = label.GetComponent<TMP_Text>();
-        lt.text = "Restart";
-        lt.alignment = TextAlignmentOptions.Center;
-        lt.fontSize = 36;
-        var lrt = label.GetComponent<RectTransform>();
-        lrt.anchorMin = new Vector2(0, 0); lrt.anchorMax = new Vector2(1, 1);
-        lrt.offsetMin = lrt.offsetMax = Vector2.zero;
+    //     var label = new GameObject("Label", typeof(TMP_Text));
+    //     label.transform.SetParent(b.transform, false);
+    //     var lt = label.GetComponent<TMP_Text>();
+    //     lt.text = "Restart";
+    //     lt.alignment = TextAlignmentOptions.Center;
+    //     lt.fontSize = 36;
+    //     var lrt = label.GetComponent<RectTransform>();
+    //     lrt.anchorMin = new Vector2(0, 0); lrt.anchorMax = new Vector2(1, 1);
+    //     lrt.offsetMin = lrt.offsetMax = Vector2.zero;
 
-        HookRestartButton();
-    }
+    //     HookRestartButton();
+    // }
 
     void HookRestartButton()
     {
@@ -182,6 +182,8 @@ public class RaceController : MonoBehaviour
     {
         if (!winText) return;
         var root = winText.transform.parent; // panel
-        if (root) root.gameObject.SetActive(v);
+        // if (root) root.gameObject.SetActive(v);
+        root.transform.GetChild(0).gameObject.SetActive(!v);
+        winText.gameObject.SetActive(v);
     }
 }

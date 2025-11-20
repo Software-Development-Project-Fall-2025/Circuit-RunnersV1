@@ -65,7 +65,7 @@ public class CheckpointTrigger : MonoBehaviour
     public bool permanentHideWhenPlayerHitsStart = false;
 
     [Tooltip("Tag used to detect the Player for the permanent hide at CP0.")]
-    public string playerTag = "Player";
+    public string playerTag = "Car";
 
     private bool _permaHidden = false;
 
@@ -108,13 +108,27 @@ public class CheckpointTrigger : MonoBehaviour
     // -------------------------------
     void OnTriggerEnter(Collider other)
     {
-        var car = other.GetComponentInParent<CarProgress>();
+        CarProgress car;
+        
+        // Debug.Log(other.name); (Car component name Debug)
+        if(other.tag == "Car")
+        {
+           car = other.GetComponent<CarProgress>();
+        } else 
+        {
+            car = other.GetComponentInParent<CarProgress>();
+        }
+
+        // Debug.Log(car.name); (Car name debug)
+
         if (!car) return;
         if (!manager) manager = FindObjectOfType<CheckpointManager>();
+
 
         // Debounce per car
         if (_lastHitTime.TryGetValue(car, out var lastT) && Time.time - lastT < rehitCooldown) return;
         _lastHitTime[car] = Time.time;
+        Debug.Log("HIT!!!");
 
         // 1) Report progress
         car.OnPassedCheckpoint(checkpointIndex, transform.position);
