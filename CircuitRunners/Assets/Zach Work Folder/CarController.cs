@@ -53,9 +53,13 @@ public class CarController : MonoBehaviour {
     public float grassGripMultiplier = 0.4f; 
 
     public Rigidbody sphereRB;
+    private DeathHandler deathHandler;
 
     void Start() {
         sphereRB.transform.parent = null;
+
+        // cache death handler (if present on a child)
+        deathHandler = GetComponentInChildren<DeathHandler>();
 
         // Initialize smoke at full health
         if (smokeController != null)
@@ -64,6 +68,7 @@ public class CarController : MonoBehaviour {
 
     public void TakeDamage(float amount)
     {
+        if (deathHandler != null && deathHandler.IsInvincible) return;
         health -= amount;
         if (health < 0f) health = 0f;
 

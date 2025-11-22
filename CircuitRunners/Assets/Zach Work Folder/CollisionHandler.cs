@@ -13,7 +13,16 @@ public class CollisionHandler : MonoBehaviour
     {
         Debug.Log("Start function");
         rb = GetComponent<Rigidbody>();
-        carController = gameObject.transform.parent.GetComponent<CarController>();
+
+        if (gameObject.transform.parent.GetComponent<CarController>() == null)
+        {
+            Debug.LogError("No CarController found in parent objects.");
+        }
+        else
+        {
+            Debug.Log("CarController found in parent objects.");
+            carController = gameObject.transform.parent.GetComponent<CarController>();
+        }
     }
 
     void OnCollisionEnter(Collision collision) {
