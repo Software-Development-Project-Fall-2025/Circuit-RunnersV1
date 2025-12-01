@@ -820,6 +820,7 @@ PlayerSettings:
   webGLPowerPreference: 2
   scriptingDefineSymbols:
     Standalone: EASYROADS3D_PRO
+    WebGL: EASYROADS3D_PRO
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
