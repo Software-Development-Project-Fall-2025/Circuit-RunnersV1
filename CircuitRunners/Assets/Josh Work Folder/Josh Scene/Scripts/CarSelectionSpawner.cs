@@ -11,10 +11,10 @@ public class CarSelectionSpawner : MonoBehaviour
     [Header("Car Section")]
     public GameObject[] cars;
     public Transform[] spawnpoint;
-    [Header("----------------")]
-    [Header("                ")]
     [Header("Force car selection and debug")]
     public int car;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +23,17 @@ public class CarSelectionSpawner : MonoBehaviour
         {
             car = DataContainer.Instance.carChosen;
             Debug.Log("DataContainer found and car selected was " + car);
-            //Destroy(DataContainer.Instance.gameObject);
+            Destroy(DataContainer.Instance.gameObject);
+            //Vector3 pos = spawnpoint[car];
+            Instantiate(cars[car]);
         }
         else
         {
             Debug.Log("ERROR 404: DataContainer not found");
         }
+
+
+        
 
 
     }
