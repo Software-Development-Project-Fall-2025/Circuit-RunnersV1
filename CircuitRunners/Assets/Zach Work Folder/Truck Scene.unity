@@ -406,7 +406,7 @@ Transform:
   m_GameObject: {fileID: 251232041}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -30.618622, y: 25.083048, z: -30.696165}
+  m_LocalPosition: {x: -30.618618, y: 26.310003, z: -30.618618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -426,9 +426,9 @@ GameObject:
   - component: {fileID: 337749312}
   - component: {fileID: 337749315}
   - component: {fileID: 337749316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TruckSphere
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,7 +442,7 @@ Transform:
   m_GameObject: {fileID: 337749310}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -458,14 +458,14 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 183
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -556,24 +556,24 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 503
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8551719, y: 2.6117086, z: 5.8774548}
-  m_Center: {x: -0.42758596, y: 0.8058543, z: -0.0028891563}
+  m_Size: {x: 2.75, y: 1.85, z: 5.85}
+  m_Center: {x: 0, y: 0.5, z: -0.25}
 --- !u!1001 &338423911
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 838395600}
+    m_TransformParent: {fileID: 1580122342}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0dd36ff5cf0f11c488c5a344e5d60529,
         type: 3}
@@ -598,7 +598,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0dd36ff5cf0f11c488c5a344e5d60529,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.41
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0dd36ff5cf0f11c488c5a344e5d60529,
         type: 3}
@@ -857,6 +857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  smokeController: {fileID: 0}
   maxSpeed: 40
   turnSpeed: 240
   baseAcceleration: 125
@@ -931,7 +932,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 338423912}
+  - {fileID: 1580122342}
   - {fileID: 337749311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -962,10 +963,10 @@ MonoBehaviour:
   raycastDistance: 1
   roadLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   grassLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   roadGripMultiplier: 1
   grassGripMultiplier: 0.4
   sphereRB: {fileID: 337749315}
@@ -1253,7 +1254,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 838395600}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 20
@@ -1282,13 +1283,45 @@ Transform:
   m_GameObject: {fileID: 1286301445}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -30.618622, y: 25.083048, z: -30.696165}
+  m_LocalPosition: {x: -30.618618, y: 26.310003, z: -30.618618}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 598242608}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
+--- !u!1 &1580122341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1580122342}
+  m_Layer: 0
+  m_Name: TruckParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1580122342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580122341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 338423912}
+  m_Father: {fileID: 838395600}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2003898178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,5 +1436,5 @@ SceneRoots:
   - {fileID: 2003898182}
   - {fileID: 251232046}
   - {fileID: 1286301447}
-  - {fileID: 838395600}
   - {fileID: 649713355}
+  - {fileID: 838395600}

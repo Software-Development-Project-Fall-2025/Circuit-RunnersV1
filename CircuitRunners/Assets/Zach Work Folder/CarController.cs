@@ -122,7 +122,11 @@ public class CarController : MonoBehaviour {
         {
             if (roadLayer == (roadLayer | (1 << hit.collider.gameObject.layer)))
             {
+                Debug.Log("on the road");
                 isOnRoad = true;
+            }
+            else {
+                Debug.Log("off the road");
             }
         }
 
@@ -143,12 +147,14 @@ public class CarController : MonoBehaviour {
 
             if (isDrifting)
             {
+                Debug.Log("drifting");
                 vel = Vector3.Lerp(vel, forward * vel.magnitude, driftFactor * Time.fixedDeltaTime);
                 sphereRB.velocity = vel;
                 sphereRB.AddForce(right * turnInput * lateralForce * speedPercent, ForceMode.Acceleration);
             }
             else if (isSpinningOut)
             {
+                Debug.Log("Spinning out");
                 float spinDir = Mathf.Sign(turnInput != 0 ? turnInput : slipAngle);
                 sphereRB.AddTorque(Vector3.up * spinDir * spinoutTorque, ForceMode.Acceleration);
             }

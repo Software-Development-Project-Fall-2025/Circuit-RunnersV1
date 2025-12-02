@@ -25,18 +25,18 @@ public class TruckScript : MonoBehaviour {
 
 
     public float health = 100f;
-    public float maxSpeed = 40f;
-    public float turnSpeed = 120f;
-    public float baseAcceleration = 125f;
+    public float maxSpeed = 33f;
+    public float turnSpeed = 160f;
+    public float baseAcceleration = 100f;
 
     public float lateralForce = 40f;
     public float driftFactor = 0.8f;
     public float driftStartAngle = 25f;
     public float spinoutAngle = 65f;
-    public float spinoutTorque = 15f;
-    public float grip = 80f;
+    public float spinoutTorque = 20f;
+    public float grip = 60f;
 
-    public float riseResponse = 4f;
+    public float riseResponse = 3f;
     public float fallResponse = 2f;
 
     private float moveIntensity;
@@ -45,15 +45,21 @@ public class TruckScript : MonoBehaviour {
     private bool isOnRoad = true;  // Track surface type
 
     public float raycastDistance = 1f; 
-    public LayerMask roadLayer;         
-    public LayerMask grassLayer;       
+    public string roadTag = "Road";         
+    public string grassTag = "Grass";       
     public float roadGripMultiplier = 1f;
-    public float grassGripMultiplier = 0.4f; 
+    public float grassGripMultiplier = .4f;
+    public float grassIceSlip = 0.7f; // 0 = no slip, 1 = very slippery
 
     public Rigidbody sphereRB;
 
     void Start() {
+        sphereRB.constraints = RigidbodyConstraints.FreezePositionY;
+        //sphereRB.constraints = RigidbodyConstraints.FreezeRotationX;
+        //sphereRB.constraints = RigidbodyConstraints.FreezeRotationZ;
+        //sphereRB.constraints = RigidbodyConstraints.FreezeRotationY;
         sphereRB.transform.parent = null;
+
     }
 
     void FixedUpdate() {
@@ -90,16 +96,28 @@ public class TruckScript : MonoBehaviour {
             sphereRB.AddForce(forward * targetForce, ForceMode.Acceleration);
         }
 
-        // Checks surface type with raycast
+        // Gets surface type with raycast
         RaycastHit hit;
         isOnRoad = false;  
-        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out hit, raycastDistance))
+        
+        LayerMask groundMask = ~LayerMask.GetMask("PlayerTruck");
+        
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, raycastDistance, groundMask))
         {
-            if (roadLayer == (roadLayer | (1 << hit.collider.gameObject.layer)))
+            string layerName = LayerMask.LayerToName(hit.collider.gameObject.layer);
+            string tagName = hit.collider.gameObject.tag;
+            //Debug.Log("Layer: " + layerName + " | Tag: " + tagName);
+            
+            if (tagName == roadTag)
             {
                 isOnRoad = true;
             }
+            else
+            {
+                // You on the grass lmao
+            }
         }
+
 
         float currentGripMultiplier = isOnRoad ? roadGripMultiplier : grassGripMultiplier;
         
@@ -118,12 +136,14 @@ public class TruckScript : MonoBehaviour {
 
             if (isDrifting)
             {
+                Debug.Log("Drifting");
                 vel = Vector3.Lerp(vel, forward * vel.magnitude, driftFactor * Time.fixedDeltaTime);
                 sphereRB.velocity = vel;
                 sphereRB.AddForce(right * turnInput * lateralForce * speedPercent, ForceMode.Acceleration);
             }
             else if (isSpinningOut)
             {
+                Debug.Log("spinning out");
                 float spinDir = Mathf.Sign(turnInput != 0 ? turnInput : slipAngle);
                 sphereRB.AddTorque(Vector3.up * spinDir * spinoutTorque, ForceMode.Acceleration);
             }
@@ -133,6 +153,14 @@ public class TruckScript : MonoBehaviour {
                 float currentGrip = grip * (isOnRoad ? roadGripMultiplier : grassGripMultiplier);
                 Vector3 gripForce = -right * lateralSpeed * currentGrip;
                 sphereRB.AddForce(gripForce, ForceMode.Acceleration);
+
+                if (!isOnRoad)
+                {
+                    Debug.Log("slipping");
+                    //sphereRB.AddForce(vel.normalized * grassIceSlip, ForceMode.Acceleration);
+                    float spinDir = Mathf.Sign(turnInput != 0 ? turnInput : slipAngle);
+                    sphereRB.AddTorque(Vector3.up * spinDir * spinoutTorque, ForceMode.Acceleration);
+                }
             }
         }
 
@@ -140,15 +168,14 @@ public class TruckScript : MonoBehaviour {
         float baseDrag = isOnRoad ? 0.2f : 0.4f;  // More drag on grass
         float maxDrag = isOnRoad ? 2f : 3f;       // More max drag on grass
         sphereRB.drag = Mathf.Lerp(baseDrag, maxDrag, speedPercent); // Adds all the oversteer 
-        //Debug.Log("Speed: " + forwardSpeed); 
     }
 
     private float magicTruckTranny(float speedPercent){
         // Definitley needs another gear but its fucky
-        if (speedPercent < 0.3f)
-            return Mathf.Lerp(0.3f, 0.7f, speedPercent / 0.3f);
-        else if (speedPercent < 0.6f)
-            return Mathf.Lerp(0.7f, 1.0f, (speedPercent - 0.3f) / 0.3f);
+        if (speedPercent < 0.4f)
+            return Mathf.Lerp(0.3f, 0.7f, speedPercent / 0.4f);
+        else if (speedPercent < 0.7f)
+            return Mathf.Lerp(0.7f, 0.9f, (speedPercent - 0.3f) / 0.3f);
         else
             return 1.0f;
     }
