@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cars:
-  - {fileID: 8512620182072834649, guid: 436b69c3afb711044aea3f9aa4154563, type: 3}
+  - {fileID: 3952916433386072441, guid: 2e867ee607e0f671e980287018246ddf, type: 3}
   spawnpoint:
   - {fileID: 1616843173}
   car: 0

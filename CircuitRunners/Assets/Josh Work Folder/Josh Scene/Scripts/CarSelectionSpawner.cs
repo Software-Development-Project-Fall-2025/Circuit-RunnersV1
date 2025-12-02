@@ -24,8 +24,7 @@ public class CarSelectionSpawner : MonoBehaviour
             car = DataContainer.Instance.carChosen;
             Debug.Log("DataContainer found and car selected was " + car);
             Destroy(DataContainer.Instance.gameObject);
-            //Vector3 pos = spawnpoint[car];
-            Instantiate(cars[car]);
+            Instantiate(cars[car], spawnpoint[car].position, spawnpoint[car].rotation);
         }
         else
         {
