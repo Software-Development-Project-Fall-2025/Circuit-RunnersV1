@@ -8,6 +8,7 @@ TagManager:
   - Car
   - Grass
   - Road
+  - PlayerCar
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,6 @@ TagManager:
   - UI
   - Player
   - UI Back
-  - 
   - 
   - 
   - 

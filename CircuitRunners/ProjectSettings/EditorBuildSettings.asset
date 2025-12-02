@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Josh Work Folder/Josh Scene/Scenes/Test Map.unity
     guid: 54d81a0bef29595428d157793587d8e2
+  - enabled: 0
+    path: Assets/Minimum Game/ActualFigure8Track.unity
+    guid: 125ae67ff04e2fa6aabaee3e9b24ff63
+  - enabled: 1
+    path: Assets/Brandon Work Folder/Brandon Scene/(New)ActualFigure8Track(Updated).unity
+    guid: afa0ab47216250f4cb9404ec2692d0a3
   m_configObjects: {}
