@@ -29,6 +29,18 @@ public class ButtonHandler : MonoBehaviour
     }
 
 
+    public void CarIntSelection(int car)
+    {
+        if (DataContainer.Instance != null)
+        {
+            DataContainer.Instance.carChosen = car;
+            Debug.Log("Data Container Found and set to " + car);
+        }
+        else {
+            Debug.Log("Error 404: Data Container not Found");
+        }
+    }
+
     public void GoToSceneNameGiven(string sceneName)
     {
         startButton[0].gameObject.SetActive(true);
@@ -67,5 +79,7 @@ public class ButtonHandler : MonoBehaviour
         Debug.Log("System has Exited...");
     }
 
+
+    
     
 }
