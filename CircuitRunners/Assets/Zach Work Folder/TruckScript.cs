@@ -48,8 +48,7 @@ public class TruckScript : MonoBehaviour {
     public string roadTag = "Road";         
     public string grassTag = "Grass";       
     public float roadGripMultiplier = 1f;
-    public float grassGripMultiplier = .4f;
-    public float grassIceSlip = 0.7f; // 0 = no slip, 1 = very slippery
+    public float grassGripMultiplier = .6f;
 
     public Rigidbody sphereRB;
 
@@ -154,13 +153,6 @@ public class TruckScript : MonoBehaviour {
                 Vector3 gripForce = -right * lateralSpeed * currentGrip;
                 sphereRB.AddForce(gripForce, ForceMode.Acceleration);
 
-                if (!isOnRoad)
-                {
-                    Debug.Log("slipping");
-                    //sphereRB.AddForce(vel.normalized * grassIceSlip, ForceMode.Acceleration);
-                    float spinDir = Mathf.Sign(turnInput != 0 ? turnInput : slipAngle);
-                    sphereRB.AddTorque(Vector3.up * spinDir * spinoutTorque, ForceMode.Acceleration);
-                }
             }
         }
 
