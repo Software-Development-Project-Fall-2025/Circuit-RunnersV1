@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
 {
-    public float bounceForce = 100f;    
-    public float upwardForce = 200f;     
+    public float bounceForce = 1.00f;    
+    public float upwardForce = 2.00f;     
     public string[] collisionTags = { "Wall", "Car" };  
 
     private Rigidbody rb;
@@ -18,18 +18,18 @@ public class CollisionHandler : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
 
-        Debug.Log("SHOULD BE ENTERING COLLISION");
+        // Debug.Log("SHOULD BE ENTERING COLLISION");
         bool isValidCollision = false;
         foreach (string tag in collisionTags)
         {
             if (collision.gameObject.CompareTag(tag))
             {
-                Debug.Log("Is this valid?");
+                // Debug.Log("Is this valid?");
                 isValidCollision = true;
                 break;
             }
             else {
-                Debug.Log("WHY THIS NO WORK");
+                // Debug.Log("WHY THIS NO WORK");
             }
         }
 
@@ -54,7 +54,7 @@ public class CollisionHandler : MonoBehaviour
         rb.velocity = Vector3.zero;  
         rb.angularVelocity = Vector3.zero;  
 
-        float crashForce = 70f;  
+        float crashForce = .70f;  
         rb.AddForce(violentlyBackwards * crashForce, ForceMode.Impulse);  
 
         

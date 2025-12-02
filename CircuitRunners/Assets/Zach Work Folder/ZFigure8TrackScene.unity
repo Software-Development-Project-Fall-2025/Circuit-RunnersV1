@@ -13155,6 +13155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 651135198}
   - component: {fileID: 651135199}
+  - component: {fileID: 651135200}
   m_Layer: 8
   m_Name: Truck
   m_TagString: Car
@@ -13186,7 +13187,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651135196}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2689c7a7bb22a3d28da5e661a87da6e, type: 3}
   m_Name: 
@@ -13208,8 +13209,28 @@ MonoBehaviour:
   grassTag: Grass
   roadGripMultiplier: 1
   grassGripMultiplier: 0.4
-  grassIceSlip: 0.7
   sphereRB: {fileID: 913201892}
+--- !u!65 &651135200
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651135196}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 255
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.75, y: 1.85, z: 5.85}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &682155071 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6cf1be92d81a7174088097d2d5df2eb6,
@@ -14787,7 +14808,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 2.75, y: 1.85, z: 5.85}
   m_Center: {x: 0, y: 0.5, z: -0.25}
@@ -16123,7 +16144,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 651135198}
+  m_Follow: {fileID: 2127404440}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 20
@@ -16152,7 +16173,7 @@ Transform:
   m_GameObject: {fileID: 1125762522}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18301274, y: 0.6830127, z: -0.18301274, w: 0.6830127}
-  m_LocalPosition: {x: 376.69876, y: 25.29999, z: 420}
+  m_LocalPosition: {x: 379.69873, y: 25.600006, z: 417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18434,8 +18455,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484013676}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 4
+  m_Mass: 1000
+  m_Drag: 5000
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -18466,7 +18487,7 @@ SphereCollider:
     m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 119
+    m_Bits: 118
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -18537,11 +18558,11 @@ BoxCollider:
     m_Bits: 439
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.716919, y: 1.1860442, z: 4.4541626}
   m_Center: {x: 0.018676758, y: 0.4581194, z: -0.009552002}
@@ -19099,7 +19120,7 @@ Transform:
   m_GameObject: {fileID: 1635004737}
   serializedVersion: 2
   m_LocalRotation: {x: 0.18301274, y: 0.6830127, z: -0.18301274, w: 0.6830127}
-  m_LocalPosition: {x: 376.69876, y: 25.29999, z: 420}
+  m_LocalPosition: {x: 379.69873, y: 25.600006, z: 417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22707,7 +22728,7 @@ GameObject:
   - component: {fileID: 2127404440}
   - component: {fileID: 2127404441}
   - component: {fileID: 2127404442}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Car
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -22738,7 +22759,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2127404439}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68132e23718d74b69a0e99aab48f5563, type: 3}
   m_Name: 
@@ -22776,14 +22797,14 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 447
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 1
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1.8736572, y: 1.5, z: 4.7614746}
   m_Center: {x: 0.026184082, y: 0.25, z: -0.011169434}

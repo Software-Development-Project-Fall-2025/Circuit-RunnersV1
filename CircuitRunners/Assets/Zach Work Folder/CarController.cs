@@ -52,11 +52,13 @@ public class CarController : MonoBehaviour {
     public float roadGripMultiplier = 1f;
     public float grassGripMultiplier = 0.4f; 
 
+    private float notEveryFrame = 0f;
+
     public Rigidbody sphereRB;
 
     void Start() {
-        sphereRB.transform.parent = null;
-
+        //sphereRB.transform.parent = null;
+        
         // Initialize smoke at full health
         if (smokeController != null)
             smokeController.UpdateSmoke(1f);
@@ -107,13 +109,23 @@ public class CarController : MonoBehaviour {
         float rawForce = moveIntensity * baseAcceleration * accelMultiplier;
         float speedLimitFactor = 1f - Mathf.Pow(speedPercent, 4);
         float targetForce = rawForce * speedLimitFactor;
+        
+        // Do math here to see wether to add or subtract force
 
 
-        if (!(forwardSpeed > maxSpeed && targetForce > 0) &&
+        if (notEveryFrame >= 30.0f) {
+            Debug.Log("am i here");
+            if (!(forwardSpeed > maxSpeed && targetForce > 0) &&
             !(forwardSpeed < -maxSpeed * 0.5f && targetForce < 0))
-        {
-            sphereRB.AddForce(forward * targetForce, ForceMode.Acceleration);
+            {
+                sphereRB.AddForce(forward * targetForce, ForceMode.Acceleration);
+            }
+            notEveryFrame = 0.0f;
+        } else {
+            notEveryFrame+=(Time.fixedDeltaTime*60.0f);
+            Debug.Log("timer: " + notEveryFrame);
         }
+
 
         // Checks surface type with raycast
         RaycastHit hit;
@@ -122,11 +134,11 @@ public class CarController : MonoBehaviour {
         {
             if (roadLayer == (roadLayer | (1 << hit.collider.gameObject.layer)))
             {
-                Debug.Log("on the road");
+                // Debug.Log("on the road");
                 isOnRoad = true;
             }
             else {
-                Debug.Log("off the road");
+                // Debug.Log("off the road");
             }
         }
 
@@ -137,35 +149,35 @@ public class CarController : MonoBehaviour {
         transform.Rotate(0, newRotation, 0, Space.World);
 
         Vector3 vel = sphereRB.velocity;
-        if (vel.sqrMagnitude > 0.1f)
-        {
-            float slipAngle = Vector3.SignedAngle(forward, vel.normalized, Vector3.up);
-            float absSlip = Mathf.Abs(slipAngle);
+        // if (vel.sqrMagnitude > 0.1f)
+        // {
+        //     float slipAngle = Vector3.SignedAngle(forward, vel.normalized, Vector3.up);
+        //     float absSlip = Mathf.Abs(slipAngle);
 
-            isDrifting = absSlip > driftStartAngle && absSlip < spinoutAngle;
-            isSpinningOut = absSlip >= spinoutAngle;
+        //     isDrifting = absSlip > driftStartAngle && absSlip < spinoutAngle;
+        //     isSpinningOut = absSlip >= spinoutAngle;
 
-            if (isDrifting)
-            {
-                Debug.Log("drifting");
-                vel = Vector3.Lerp(vel, forward * vel.magnitude, driftFactor * Time.fixedDeltaTime);
-                sphereRB.velocity = vel;
-                sphereRB.AddForce(right * turnInput * lateralForce * speedPercent, ForceMode.Acceleration);
-            }
-            else if (isSpinningOut)
-            {
-                Debug.Log("Spinning out");
-                float spinDir = Mathf.Sign(turnInput != 0 ? turnInput : slipAngle);
-                sphereRB.AddTorque(Vector3.up * spinDir * spinoutTorque, ForceMode.Acceleration);
-            }
-            else
-            {
-                float lateralSpeed = Vector3.Dot(sphereRB.velocity, right);
-                float currentGrip = grip * (isOnRoad ? roadGripMultiplier : grassGripMultiplier);
-                Vector3 gripForce = -right * lateralSpeed * currentGrip;
-                sphereRB.AddForce(gripForce, ForceMode.Acceleration);
-            }
-        }
+        //     if (isDrifting)
+        //     {
+        //         // Debug.Log("drifting");
+        //         vel = Vector3.Lerp(vel, forward * vel.magnitude, driftFactor * Time.fixedDeltaTime);
+        //         sphereRB.velocity = vel;
+        //         sphereRB.AddForce(right * turnInput * lateralForce * speedPercent, ForceMode.Acceleration);
+        //     }
+        //     else if (isSpinningOut)
+        //     {
+        //         // Debug.Log("Spinning out");
+        //         float spinDir = Mathf.Sign(turnInput != 0 ? turnInput : slipAngle);
+        //         sphereRB.AddTorque(Vector3.up * spinDir * spinoutTorque, ForceMode.Acceleration);
+        //     }
+        //     else
+        //     {
+        //         float lateralSpeed = Vector3.Dot(sphereRB.velocity, right);
+        //         float currentGrip = grip * (isOnRoad ? roadGripMultiplier : grassGripMultiplier);
+        //         Vector3 gripForce = -right * lateralSpeed * currentGrip;
+        //         sphereRB.AddForce(gripForce, ForceMode.Acceleration);
+        //     }
+        // }
 
         // Adjust drag based on surface and speed
         float baseDrag = isOnRoad ? 0.2f : 0.4f;  // More drag on grass
