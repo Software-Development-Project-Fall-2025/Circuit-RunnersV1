@@ -1,5 +1,0 @@
---UI Colors--
-
-Chips      Gray: 9C9393
-Main Word  Blue: 17E5B1
-

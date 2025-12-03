@@ -9,28 +9,28 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Josh Work Folder/Josh Scene/Scenes/Credits.unity
+    path: Assets/Josh Work Folder/Scenes/Credits.unity
     guid: 59a1d453310db3142aa5e1aebe8fe1b6
   - enabled: 1
-    path: Assets/Josh Work Folder/Josh Scene/Scenes/Game Select.unity
+    path: Assets/Josh Work Folder/Scenes/Game Select.unity
     guid: 3dbd7f75b86a1124ebdb4f7656e48423
   - enabled: 1
-    path: Assets/Josh Work Folder/Josh Scene/Scenes/IDK WHY THIS IS HERE.unity
+    path: Assets/Josh Work Folder/Scenes/IDK WHY THIS IS HERE.unity
     guid: 1ce65a3a1e7988b4aa287fff44b0f2c7
   - enabled: 1
-    path: Assets/Josh Work Folder/Josh Scene/Scenes/Lobby.unity
+    path: Assets/Josh Work Folder/Scenes/Lobby.unity
     guid: 4ecf2e854f8e41448b6e58416d47feba
   - enabled: 1
-    path: Assets/Josh Work Folder/Josh Scene/Scenes/Pause.unity
+    path: Assets/Josh Work Folder/Scenes/Pause.unity
     guid: 9a2f4e80cdf677342ab3c41f82abeb3c
   - enabled: 1
-    path: Assets/Josh Work Folder/Josh Scene/Scenes/Settings.unity
+    path: Assets/Josh Work Folder/Scenes/Settings.unity
     guid: 1cc33ca3fad0f504c86522c9cfba3b7b
   - enabled: 1
-    path: Assets/Josh Work Folder/Josh Scene/Scenes/Start Screen.unity
+    path: Assets/Josh Work Folder/Scenes/Start Screen.unity
     guid: 1d58e692a5525ea4bbd9e459c6d8829b
   - enabled: 1
-    path: Assets/Josh Work Folder/Josh Scene/Scenes/Test Map.unity
+    path: Assets/Josh Work Folder/Scenes/Test Map.unity
     guid: 54d81a0bef29595428d157793587d8e2
   - enabled: 1
     path: Assets/Minimum Game/ActualFigure8Track.unity
