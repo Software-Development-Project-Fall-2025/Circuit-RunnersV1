@@ -15,6 +15,7 @@ public class CarSelectionSpawner : MonoBehaviour
     [Header("Force car selection and debug")]
     public int car;
     public bool ignor;
+    public bool ignorPOS;
  
     void Start()
     {
@@ -23,12 +24,26 @@ public class CarSelectionSpawner : MonoBehaviour
             car = DataContainer.Instance.carChosen;
             Debug.Log("DataContainer found and car selected was " + car);
             Destroy(DataContainer.Instance.gameObject);
-            Instantiate(cars[car], spawnpoint[car].position, spawnpoint[car].rotation);
-            
+            if (ignorPOS == false)
+            {
+                Instantiate(cars[car], spawnpoint[car].position, spawnpoint[car].rotation);
+            }
+            else
+            {
+                Instantiate(cars[car]);
+            }
+           
         }
         else if(ignor == true)
         {
-            Instantiate(cars[car], spawnpoint[car].position, spawnpoint[car].rotation);
+            if (ignorPOS == false)
+            {
+                Instantiate(cars[car], spawnpoint[car].position, spawnpoint[car].rotation);
+            }
+            else
+            {
+                Instantiate(cars[car]);
+            }
         }
         else
         {

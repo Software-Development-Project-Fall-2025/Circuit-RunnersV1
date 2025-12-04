@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Ghost\\Documents\\Temp Folder S\\Circuit-RunnersV1\\CircuitRunners\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{14C0DAF6-B78F-A8F7-3277-0D28609C3F8A}|Assembly-CSharp.csproj|c:\\users\\ghost\\documents\\temp folder s\\circuit-runnersv1\\circuitrunners\\assets\\josh work folder\\scripts\\carselectionspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14C0DAF6-B78F-A8F7-3277-0D28609C3F8A}|Assembly-CSharp.csproj|solutionrelative:assets\\josh work folder\\scripts\\carselectionspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{14C0DAF6-B78F-A8F7-3277-0D28609C3F8A}|Assembly-CSharp.csproj|c:\\users\\ghost\\documents\\temp folder s\\circuit-runnersv1\\circuitrunners\\assets\\josh work folder\\scripts\\endscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14C0DAF6-B78F-A8F7-3277-0D28609C3F8A}|Assembly-CSharp.csproj|solutionrelative:assets\\josh work folder\\scripts\\endscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{14C0DAF6-B78F-A8F7-3277-0D28609C3F8A}|Assembly-CSharp.csproj|c:\\users\\ghost\\documents\\temp folder s\\circuit-runnersv1\\circuitrunners\\assets\\josh work folder\\scripts\\datacontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{14C0DAF6-B78F-A8F7-3277-0D28609C3F8A}|Assembly-CSharp.csproj|solutionrelative:assets\\josh work folder\\scripts\\datacontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14C0DAF6-B78F-A8F7-3277-0D28609C3F8A}|Assembly-CSharp.csproj|C:\\Users\\Ghost\\Documents\\Temp Folder S\\Circuit-RunnersV1\\CircuitRunners\\assets\\josh work folder\\scripts\\carselectionspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{14C0DAF6-B78F-A8F7-3277-0D28609C3F8A}|Assembly-CSharp.csproj|solutionrelative:assets\\josh work folder\\scripts\\carselectionspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,8 +22,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EndScreen.cs",
+              "DocumentMoniker": "C:\\Users\\Ghost\\Documents\\Temp Folder S\\Circuit-RunnersV1\\CircuitRunners\\Assets\\Josh Work Folder\\Scripts\\EndScreen.cs",
+              "RelativeDocumentMoniker": "Assets\\Josh Work Folder\\Scripts\\EndScreen.cs",
+              "ToolTip": "C:\\Users\\Ghost\\Documents\\Temp Folder S\\Circuit-RunnersV1\\CircuitRunners\\Assets\\Josh Work Folder\\Scripts\\EndScreen.cs",
+              "RelativeToolTip": "Assets\\Josh Work Folder\\Scripts\\EndScreen.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAowBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T21:55:20.495Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CarSelectionSpawner.cs",
+              "DocumentMoniker": "C:\\Users\\Ghost\\Documents\\Temp Folder S\\Circuit-RunnersV1\\CircuitRunners\\Assets\\Josh Work Folder\\Scripts\\CarSelectionSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Josh Work Folder\\Scripts\\CarSelectionSpawner.cs",
+              "ToolTip": "C:\\Users\\Ghost\\Documents\\Temp Folder S\\Circuit-RunnersV1\\CircuitRunners\\Assets\\Josh Work Folder\\Scripts\\CarSelectionSpawner.cs",
+              "RelativeToolTip": "Assets\\Josh Work Folder\\Scripts\\CarSelectionSpawner.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwBEAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T19:08:20.605Z"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -31,19 +60,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-04T14:58:14.001Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CarSelectionSpawner.cs",
-              "DocumentMoniker": "C:\\Users\\Ghost\\Documents\\Temp Folder S\\Circuit-RunnersV1\\CircuitRunners\\Assets\\Josh Work Folder\\Scripts\\CarSelectionSpawner.cs",
-              "RelativeDocumentMoniker": "Assets\\Josh Work Folder\\Scripts\\CarSelectionSpawner.cs",
-              "ToolTip": "C:\\Users\\Ghost\\Documents\\Temp Folder S\\Circuit-RunnersV1\\CircuitRunners\\Assets\\Josh Work Folder\\Scripts\\CarSelectionSpawner.cs",
-              "RelativeToolTip": "Assets\\Josh Work Folder\\Scripts\\CarSelectionSpawner.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwB8AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T19:08:20.605Z",
               "EditorCaption": ""
             }
           ]
