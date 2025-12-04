@@ -14,6 +14,7 @@ public class CarSelectionSpawner : MonoBehaviour
     public Transform[] spawnpoint;
     [Header("Force car selection and debug")]
     public int car;
+    public bool ignor;
  
     void Start()
     {
@@ -24,6 +25,10 @@ public class CarSelectionSpawner : MonoBehaviour
             Destroy(DataContainer.Instance.gameObject);
             Instantiate(cars[car], spawnpoint[car].position, spawnpoint[car].rotation);
             
+        }
+        else if(ignor == true)
+        {
+            Instantiate(cars[car], spawnpoint[car].position, spawnpoint[car].rotation);
         }
         else
         {
