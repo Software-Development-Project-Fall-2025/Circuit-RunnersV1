@@ -36982,7 +36982,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathEffectPrimary: {fileID: 1335794950}
   deathEffectSecondary: {fileID: 883639575}
-  disableControllerOnDeath: 1
+  respawnDelay: 2
+  respawnHealth: 100
+  invincibilityDuration: 3
 --- !u!1 &2143586965
 GameObject:
   m_ObjectHideFlags: 0
