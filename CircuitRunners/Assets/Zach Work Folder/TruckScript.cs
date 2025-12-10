@@ -57,7 +57,7 @@ public class TruckScript : MonoBehaviour {
         //sphereRB.constraints = RigidbodyConstraints.FreezeRotationX;
         //sphereRB.constraints = RigidbodyConstraints.FreezeRotationZ;
         //sphereRB.constraints = RigidbodyConstraints.FreezeRotationY;
-        sphereRB.transform.parent = null;
+        sphereRB.transform.parent.parent = null;
 
     }
 
@@ -65,7 +65,8 @@ public class TruckScript : MonoBehaviour {
 
         moveInput = Input.GetAxisRaw("Vertical");
         turnInput = Input.GetAxisRaw("Horizontal");
-        transform.position = sphereRB.transform.position;
+        sphereRB.transform.parent.position = sphereRB.transform.position;
+        // transform.position = sphereRB.transform.position;
 
         // I swear this makes it drive better although it does a stupid lil nose dip
         //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(sphereRB.velocity.normalized, Vector3.up), Time.fixedDeltaTime * 2f);

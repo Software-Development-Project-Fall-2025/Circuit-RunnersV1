@@ -98,6 +98,7 @@ public class CarController : MonoBehaviour {
 
         float forwardSpeed = Vector3.Dot(sphereRB.velocity, forward);
         float speedPercent = Mathf.Clamp01(Mathf.Abs(forwardSpeed) / maxSpeed);
+        Debug.Log("Speed: " + speedPercent);
 
         // Smooths input
         float tau = moveInput != 0f ? riseResponse : fallResponse;
@@ -111,10 +112,10 @@ public class CarController : MonoBehaviour {
         float targetForce = rawForce * speedLimitFactor;
         
         // Do math here to see wether to add or subtract force
-
-
+        if (moveIntensity == 0)
+            forward = -forward; 
         if (notEveryFrame >= 30.0f) {
-            Debug.Log("am i here");
+            // Debug.Log("am i here");
             if (!(forwardSpeed > maxSpeed && targetForce > 0) &&
             !(forwardSpeed < -maxSpeed * 0.5f && targetForce < 0))
             {
@@ -123,7 +124,6 @@ public class CarController : MonoBehaviour {
             notEveryFrame = 0.0f;
         } else {
             notEveryFrame+=(Time.fixedDeltaTime*60.0f);
-            Debug.Log("timer: " + notEveryFrame);
         }
 
 
