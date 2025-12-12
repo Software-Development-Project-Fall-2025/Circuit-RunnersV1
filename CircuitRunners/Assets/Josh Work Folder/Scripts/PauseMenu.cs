@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
-    [Header("Assign Your Pause Menu UI Panel Here")]
+    [Header("Assign Your Pause Menu UI Here")]
     public GameObject pauseMenuUI;
 
     private bool isPaused = false;

@@ -359,14 +359,14 @@ RectTransform:
   m_GameObject: {fileID: 706028985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
+  m_LocalScale: {x: 1.5578738, y: 1.5578738, z: 1.5578738}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6147227004247183611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -408.51187, y: 49.983047}
+  m_AnchoredPosition: {x: -548, y: 49.983047}
   m_SizeDelta: {x: 385.0743, y: 224.0425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &706028987
@@ -581,14 +581,14 @@ RectTransform:
   m_GameObject: {fileID: 1137975823}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
+  m_LocalScale: {x: 1.5578738, y: 1.5578738, z: 1.5578738}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6147227004247183611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 392, y: 61.084}
+  m_AnchoredPosition: {x: 546, y: 61.084}
   m_SizeDelta: {x: 401.2914, y: 236.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1137975825
@@ -656,14 +656,14 @@ RectTransform:
   m_GameObject: {fileID: 1676679058}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
+  m_LocalScale: {x: 1.5578738, y: 1.5578738, z: 1.5578738}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6147227004247183611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -408, y: 62.742065}
+  m_AnchoredPosition: {x: -547.48816, y: 62.742065}
   m_SizeDelta: {x: 425.3692, y: 238.6648}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1676679060
@@ -731,7 +731,7 @@ RectTransform:
   m_GameObject: {fileID: 1727717041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
+  m_LocalScale: {x: 1.5578738, y: 1.5578738, z: 1.5578738}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7804879698396318194}
@@ -739,7 +739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.5098, y: 295.61}
+  m_AnchoredPosition: {x: -1.5098, y: 389}
   m_SizeDelta: {x: 203.1155, y: 67.102}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1727717043
@@ -807,14 +807,14 @@ RectTransform:
   m_GameObject: {fileID: 1764763485}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
+  m_LocalScale: {x: 1.5578738, y: 1.5578738, z: 1.5578738}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6147227004247183611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 397.0644, y: 59.781235}
+  m_AnchoredPosition: {x: 551.0644, y: 59.781235}
   m_SizeDelta: {x: 385.0743, y: 224.0425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1764763487
@@ -852,6 +852,8 @@ MonoBehaviour:
     Drivable-Free Low
     Poly Cars by AWBMEGAMES
 
+    Song: Sunrise Grand_Project
+
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3e78ae0c09eda39429d7e98147861349, type: 2}
@@ -880,7 +882,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.5
+  m_fontSize: 21.05
   m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1243,7 +1245,7 @@ RectTransform:
   m_GameObject: {fileID: 2976349048403090566}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2759, y: 1.2759, z: 1.2759}
+  m_LocalScale: {x: 1.8745896, y: 1.8745896, z: 1.8745896}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 313270735988873998}
@@ -1251,7 +1253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -5.6761, y: -299.94}
+  m_AnchoredPosition: {x: -5.6761, y: -348}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2976349048403090566
@@ -1679,7 +1681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &8956557108170416754
 GameObject:
   m_ObjectHideFlags: 0

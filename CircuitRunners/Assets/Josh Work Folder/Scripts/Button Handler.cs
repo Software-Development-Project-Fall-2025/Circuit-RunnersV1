@@ -11,6 +11,8 @@ public class ButtonHandler : MonoBehaviour
     [Header("Button if Needed")]
     public List<Button> startButton;
 
+    
+
     [Header("Later Use")]
     public List<GameObject> hiddenItem;
     
@@ -49,6 +51,36 @@ public class ButtonHandler : MonoBehaviour
         {
             SceneManager.LoadScene(sceneName);
         });
+
+    }
+
+    public void wipeDataContainer()
+    {
+        if (DataContainer.Instance != null)
+        {
+            Destroy(DataContainer.Instance.gameObject);
+        }
+
+        else {
+
+            Debug.Log("No Data Container Instance Active");
+        }
+    }
+
+    public void killMainMusic()
+    {
+
+        MusicHandler.Instance.PlayGameMusic(); // Or .StopMusic()
+
+        // Load scene
+        //SceneManager.LoadScene("GameScene");
+    }
+
+    public void killGameMusic() {
+        MusicHandler.Instance.PlayMenuMusic(); // Or .StopMusic()
+
+        // Load scene
+        //SceneManager.LoadScene("GameScene");
 
     }
 
